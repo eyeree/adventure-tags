@@ -1,0 +1,142 @@
+<html lang="en">
+    <head>
+        <title>Prototype</title>
+        <script src="./simple-adventure-tags.js"></script>
+        <style>
+            a { color: blue; text-decoration: underline; cursor: pointer; }
+        </style>
+        <script>
+            onLoad(() => {
+                getLocation('outside-cabin')
+                    .onEntry(location => { console.log('entry called', location.id); })
+                    .onExit(location => { console.log('exit called', location.id); });
+            });
+        </script>
+    </head>
+    <body>
+
+        <at-location id="outside-cabin">
+
+            <h1>Outside Cabin</h1>
+
+            <p>
+                You are outside a cabin in the woods.
+            </p>
+
+            <at-if state="not outside-cabin-seen">
+                <p>
+                    The cabin is small and rundown. It hasn't been occupied in years. There is one small broken window and a
+                    door on one side. The cabin is completely surrounded by dark dense woods.
+                </p>
+                <p>
+                    You do not recall how you got here.
+                </p>
+            </at-if>
+
+            <p>There is a <a onclick="setLocation('woods')">trail that leads into the woods</a>.</p>
+            <p>You can <a onclick="setLocation('inside-cabin')">enter the cabin</a>.</p>
+
+        </at-location>
+
+        <at-location id="inside-cabin">
+
+            <h1>Inside Cabin</h1>
+
+            <p>
+                You are inside of a dirty old cabin. <at-if state="not lantern-on">It is dark in here.</case>
+            </p>
+
+            <at-item id="lantern">
+                <p>
+                    You are holding a <at-if state='lantern-on'>glowing</at-if><at-else>dark</at-else> lantern. You can 
+                    <at-if state="lantern-held">
+                        <a onclick="dropItem('lantern')">put the lantern down</a>,
+                    </at-if>
+                    <at-else>
+                        <a onclick="takeItem('lantern')">pick the lantern up</a>,
+                    </at-else>
+                    or
+                    <at-if state="lantern-on">
+                        <a onclick="clearState('lantern-on')">turn it off</a>.
+                    </at-if>
+                    <at-else>
+                        <a onclick="setState('lantern-on')">turn it on</a>.
+                    </at-else>
+                </p>
+                <!-- <p>
+                    You are holding a 
+                    <span data-state='lantern-on'>glowing</span>
+                    <span data-state='not lantern-on'>dark</span>
+                    lantern.
+                    You can 
+                    <span data-state="lantern-held"><a onclick="dropItem('lantern')">put the lantern down</a></span>
+                    <span data-state="not lantern-held"><a onclick="takeItem('lantern')">pick up the lantern</a></span>,
+                    or
+                    <span data-state="lantern-on"><a onclick="clearState('lantern-on')">turn it off</a></span>
+                    <span data-state="not lantern-on"><a onclick="setState('lantern-on')">turn it on</a></span>.
+                </p> -->
+                <!-- <p>
+                    <at-switch>
+                        <at-case state="lantern-held">
+                            You are holding a <at-switch><at-case state='lantern-on'>glowing</at-case><at-else>dark</at-else></at-switch> lantern.
+                            You can <a onclick="dropItem('lantern')">put the lantern down</a>, or 
+                            <at-switch>
+                                <at-case state='lantern-on'>
+                                    <a onclick="clearState('lantern-on')">turn it off</a>
+                                </at-case>
+                                <at-else>
+                                    <a onclick="setState('lantern-on')">turn it on</a>
+                                </at-else>
+                            </at-switch>.
+                        </at-case>
+                        <at-else>
+                            There is a <at-switch><at-case state='lantern-on'>glowing</at-case><at-else>dark</at-else></at-switch> lantern here. 
+                            You can <a onclick="takeItem('lantern')">pick the lantern up</a>, or
+                            <at-switch>
+                                <at-case state='lantern-on'>
+                                    <a onclick="clearState('lantern-on')">turn it off</a>
+                                </at-case>
+                                <at-else>
+                                    <a onclick="setState('lantern-on')">turn it on</a>
+                                </at-else>
+                            </at-switch>.
+                        </at-else>
+                    </at-switch>
+                </p> -->
+            </at-item>
+
+            <p>You can <a onclick="setLocation('outside-cabin')">exit the cabin</a>.</p>
+            
+        </at-location>
+
+        <at-location id="woods">
+            <h1>Woods</h1>
+            <p>You have followed a path deep into the woods, but the trail seems to end here. You can <a onclick="setLocation('outside-cabin')">go back the way you came</a> .</p>
+            <at-item id="coin">
+                <at-switch>
+                    <at-case state="coin-held">
+                        <p>You are holding a coin, which you could <a onclick="dropItem('coin')">drop</a>.</p>                        
+                    </at-case>
+                    <at-case state="lantern-on and lantern-present">
+                        <p>
+                            A gold coin glints in the lantern light 
+                            <at-switch>
+                                <at-case state="location-inside-cabin">
+                                    <span>from the dust on the floor.</span>
+                                </at-case>
+                                <at-case state="location-woods">
+                                    <span>from the leaves on the ground.</span>
+                                </at-case>
+                                <at-else>
+                                    <span>from where you left it.</span>
+                                </at-else>
+                            </at-switch>
+                            You can <a onclick="takeItem('coin')">pick it up</a>.
+                        </p>
+                    </at-case>
+                </at-switch>
+            </at-item>
+        </at-location>
+        
+    </body>
+</html>
