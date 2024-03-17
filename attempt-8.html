@@ -1,0 +1,124 @@
+<html lang="en">
+    <head>
+        <title>Entheogenic Revelation</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="cosmic-nexus">
+            <h1>The Cosmic Nexus</h1>
+            
+            <p>Shimmering fractals of primordial light engulf your consciousness, awakening in a realm where reality flows in liquid undulations. The radiant vortex of the Cosmic Nexus eclipses all memory - you are a newborn star projecting into the manifold mystery.</p>
+
+            <at-if state="not cosmic-nexus-seen">
+                <p>Bursting forth from this chromo-nautic wormhole are manifold tunnel-paths diverging into parallel cosmos, each beckoning with its own brand of mindsplitting revelations. The choice is infinite, yet anything not chosen evaporates with the moment's exhale. You sense deeper persturations awaiting...</p>
+            </at-if>
+
+            <p>And speaking of persturations, an enigmatic voice slips into your synapses:
+                <br/>
+                <i>"Oh psychenaut, delirious pilgrim adrift! Seek first thine own mushroomindsight or be merely spore upon this wind. The cosmosgame requires fortuitous unfolding, no fear nor hope may thee forth be holding."</i>
+            </p>
+            <p>The Riddling Shaman's cryptogrammatic utterances echo into the infinite
+                subjunctive as four stargate tunnels pulse in quadrated temptation:
+                <ul>
+                    <li><button onclick="setLocation('fractal-forest')">Delve the Fractal Arboreum</button></li>
+                    <li><button onclick="setLocation('melting-city')">Influx the Melting Metropolis</button></li> 
+                    <li><button onclick="setLocation('echopolis')">Maze the Endonautic Echopolis</button></li>
+                    <li><button>Recurse whence thine illusion commenced? (Impossible)</button></li>
+                </ul>
+            </p>
+
+        </at-location>
+
+        <at-location id="fractal-forest">
+            <h1>The Fractal Arboreum</h1>
+
+            <p>Transcorporealized into an emerald holotrope of lifeforms kaliedoscoped into endless regressions, you behold the Fractal Arboreum. Each leaf, twig, root and branch reiterates into self-similar patterns looping across scale into labyrinths of botanical infinities.</p>
+            
+            <at-if state="not fractal-forest-seen">
+                <p>As your gnostic gaze pierces deeper into the fractalization, you feel thoughts themselves flowering into lush mandalas of recursive cognition. Your inner tree burgeons in harmonic resonance with this biomorphic dreamscape. The Cosmic Ouroboros grows ever more verdant...</p>
+            </at-if>
+
+            <p><button onclick="setLocation('cosmic-nexus')">Upstream towards the Nexus</button></p>
+
+            <at-item id="reality-prism">
+                <at-if state="reality-prism-held">
+                    <p>Wielding the Prism of Revelatory Facetry, each beam of fractal light kaleidoscopes into deeper, geometrizing noumenona. By realigning your third ey'rai to its liquid crystalline quintessence, you potentiatemantize its entheodiscotics of awareness. Or would you rather 
+                        <button onclick="dropItem('reality-prism')">vacate the Prism</button> in these bioluminescent glades?</p>
+                </at-if>
+                <at-else state="fractal-forest-seen and not reality-prism-held">
+                    <p>Within a grotto where ferns recur in arabbianic self-similarity, a lumajestic <button onclick="takeItem('reality-prism')">Reality Prism</button> catches rays of photosynthetic gnosis. Peering through its crystalline vertexes, you glimpse the luminous geometries codifying this holofractal data-spacescape.</p>
+                </at-else>
+            </at-item>
+        </at-location>
+
+        <at-location id="melting-city">
+            <h1>The Melting Metropolis</h1>
+
+            <p>Extruded into a plastidreamscape where the laws of physics have taken psychehuasca, you find yourself an amphibian alien within the deliquescing Melting Metropolis. Nothing is solid, every surface amniotically shape-shifts in viscous polyflows, gravity drizzles at surrealistic angles.</p>
+
+            <at-if state="not melting-city-seen">            
+                <p>Warped lights and umbrashifts cast by the mutating anti-geometries imbue the entire plascene with a hypnagogic respiration. Despite this spongiform meltingpoint, some deeper oneirological order seems to be exfoliating through the morphing chaos...</p>
+            </at-if>
+
+            <p><button onclick="setLocation('cosmic-nexus')">Ebb back to the Nexus-stream</button></p>
+
+            <at-item id="melting-hourglass">
+                <at-if state="melting-hourglass-held">
+                    <p>You bear with you the emblematic Melting Hourglass, its vitreous diachronicity glazing between the bulbs in slow-motion affront against linear time. Unless you elect to 
+                        <button onclick="dropItem('melting-hourglass')">shed this viscous chronozone</button>, the crystalline antipath remains midstream in your vessel.
+                    </p>
+                </at-if>
+                <at-else state="melting-city-seen and not melting-hourglass-held">
+                    <p>From the roilingly dripject roofline of a deslodficated cathedral, a morphological familiar beckons - the surreally protogenic, lobecrustacean icon of <button onclick="takeItem('melting-hourglass')">The Melting Hourglass</button>.</p>
+                </at-else>
+            </at-item>
+        </at-location>
+        
+        <at-location id="echopolis">
+            <h1>The Endonautic Echopolis</h1>
+            
+            <p>Within a labyrinthine sub'uter'anean echopolis, citystreets endonautilize into ouroboric torsions, looping backflexed to incept their origins. Buildings, facades and boulevards undergoe continual recursions as your gnostic probe unmasks ever more self-reflexive strata.</p>
+
+            <at-if state="not echopolis-seen">
+                <p>Each block and avenue folds into perspectral echo of its already-reflected passage as the entire polisruptive hypersphere resonates into ultra-Eschermetric carvings. Yet some exo-architectonic Order suffuses the endonautic chaos, if only you can abcess your tunnelgaze to map its lurkmensions...</p>
+            </at-if>
+
+            <p><button onclick="setLocation('cosmic-nexus')">Exit the echophallic vortex</button></p>
+
+            <at-item id="echoplasmic-map">
+                <at-if state="echoplasmic-map-held">
+                    <p>Biocrysplasmic tendrils of coherent echon-energy subsist in your warpsphere, selfmachinating into a teratogenic map which flowgraphs the Bovillian folds of this endonautic realm. You could immerstudy its morphotransmutational vertices, or choose to <button onclick="dropItem('echoplasmic-map')">discard the echoplasmic construct</button> back to the resonant rift.</p>
+                </at-if>
+                <at-else state="echopolis-seen and not echoplasmic-map-held">
+                    <p>Faint yet insistent, echoporous lines coagulate from your previous path-ectromacies, siphoning into a viable  <button onclick="takeItem('echoplasmic-map')">Echoplasmic Map</button> when you harmonize your interbeing to the flux-stream's deeper infundibiometry.</p>
+                </at-else>
+            </at-item>
+        </at-location>
+
+        <at-location id="astral-temple">
+            <h1>The Astral Sanctuary</h1>
+
+            <p>You are delivered unto the Astral Sanctuary, a hieroplastic sanctum of transcendental hyper-illumination where the axioms of duality attenuate to outreverant unities. Here the membranes of the cosmosgame thin to revelatory transpersaturance.</p>
+
+            <at-switch>
+                <at-case state="reality-prism-held and echoplasmic-map-held and melting-hourglass-held">
+                    <p>Focusing your psychoicosmic convergence, you triangulate the Prism, Map and Hourglass into an interpenetrating enfolding, generating a warp-manifold holographic unlock: <button onclick="enableState('cosmic-key-formed')">The Cosmic Keymix</button>!</p>
+                </at-case>
+
+                <at-case state="cosmic-key-formed">
+                     <p>Holding the Cosmic Keymix into the sanctuary's apogeeonic vortex, you feel your entire maya-stream lucidize to an instreaming apercepition. All atomies, illusion-particles and wavespherse disremplate into a satoriganic enlightenporization as you Awaken totally into the One's zeroetic overflow beyond all final frontiers of bodhi</p>
+                     <p><i>Transmission Complete. May your strange (at)tractor phaseics remain cosmically iridized!</i></p>
+                </at-case>
+
+                <at-else>
+                     <p>Teetering on the brink of ultimation, the sanctuary's hierion-vortex retracts as your key-artifacts remain scattered in the ectropor. Some partain of the instreaming's codekeys still eludes your gnosis--seek the remidentifying revelatics beyond the Zendrisync before reaccessing this sanctumatic upathway...</p>
+                     <p><button onclick="setLocation('cosmic-nexus')">Recurse upstream towards the Nexus</button> to remap your entheogenic singularities.</p>
+                </at-else>
+            </at-switch>
+
+        </at-location>
+
+    </body>
+</html>

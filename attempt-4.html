@@ -1,0 +1,191 @@
+<html lang="en">
+    <head>
+        <title>The Whimsical Fairy Garden</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+        <at-location id="backyard-garden">
+            <h1>The Secret Garden</h1>
+            <p>Towering sunflowers form a golden canopy above, showering you with a gentle rain of seeds as you find yourself in this overgrown yet enchanting backyard sanctuary. A flagstone path winds between riotous bushes bursting with fragrant pink blossoms.</p>
+
+            <at-if state="not backyard-garden-seen">
+                <p>The mingled scents of honeysuckle and freshly turned earth hang sweet on the breeze. All around, nature has reclaimed this forgotten corner in an emerald embrace of verdant beauty.</p>
+                <p>Though you cannot recall how you arrived, the garden seems to whisper its mysteries, beckoning you to unlock its vibrantly blooming secrets.</p>
+            </at-if>
+
+            <p>Nestled among the foliage, a tiny <button onclick="enableState('fairy-realm-access'); setLocation('fairy-entrance')">wooden door</button> catches your eye, intricately carved with twisting vines. Will you dare to open it and step into the unknown?</p>
+
+            <at-item id="garden-gloves">
+                <at-if state="garden-gloves-held">
+                    <p>You grip a pair of well-worn <button onclick="dropItem('garden-gloves')">gardening gloves</button>, their supple leather bearing the calloused imprint of years of diligent tending.</p>
+                </at-if>
+                <at-else state="garden-gloves-present">  
+                    <p>A scuffed pair of <button onclick="takeItem('garden-gloves')">gardening gloves</button> rests atop a nearby mossy rock, clearly left behind by some erstwhile green thumb.</p>
+                </at-else>
+            </at-item>
+
+        </at-location>
+
+        <at-location id="fairy-entrance">
+            <h1>Through the Tiny Door</h1>
+
+            <p>Descending a miniature path between towering, glowing mushroom caps, you emerge into a realm of whimsy and delight. All sense of scale has been upended, the very air shimmering with stray motes of glittering fairy dust.</p>
+
+            <at-if state="not fairy-entrance-seen">  
+                <p>Luminous turquoise and crimson toadstools loom above like the pillars of a forgotten temple. Swirling embers of golden light flicker and dance through the twilit air, borne on zephyrs carrying peals of tinkling laughter. A kaleidoscope of gossamer wings flits at the corner of your vision.</p>
+                <p>Up ahead, the path crests a rise before opening onto a sweeping meadow surrounded by towering wildflowers. The lighthearted songs of unseen woodland sprites drift toward you, beckoning you into the verdant unknown.</p>
+            </at-if>
+
+            <p>You can <button onclick="disableState('fairy-realm-access'); setLocation('backyard-garden')">return to the sanctuary</button> of your own realm or <button onclick="setLocation('fairy-meadow')">venture forth into the fairy meadow</button>.</p>
+
+            <at-item id="curious-pixie">
+                <at-if state="curious-pixie-held">
+                    <p>A miniscule <button onclick="dropItem('curious-pixie')">pixie</button> flits in dizzying circles around you, its rose-petal wings leaving shimmering contrails in the air. The infinitesimal creature chirrups merrily as it regards you through glittering black eyes.</p>
+                </at-if>
+                <at-else state="curious-pixie-present">
+                    <p>From the corner of your eye you spy a tiny <button onclick="takeItem('curious-pixie')">pixie</button> hovering several feet away, observing you with unabashed curiosity. Her delicate wings create a faint iridescent shimmer in the air as she darts from hiding place to hiding place.</p>
+                </at-else>
+            </at-item>
+
+        </at-location>
+        
+        <at-location id="fairy-meadow">
+            <h1>A Dream of Summer</h1>
+
+            <p>You emerge into a wild meadow bathed in warm sunlight, like something plucked straight from a daydream. A breathtaking profusion of wildflowers stretches out in every direction, swaying gently in a fragrant zephyr. Clouds of butterflies flit and dance from bloom to bloom, filling the air with kaleidoscopic splashes of color.</p>
+            
+            <at-if state="not fairy-meadow-seen">  
+                <p>Towering grass stalks and proud sunflowers tower above you, briefly parting to offer tantalizing glimpses of jewel-toned dragonflies zooming through the meadow. A hummingbird hovers in midair, its iridescent feathers glittering as it avidly sips nectar from a nearby bloom.</p>
+                <p>Directly ahead, a glittering <button onclick="setLocation('fairy-stream')">ribbon of water</button> winds through the meadow's heart, catching the sunlight in dazzling refractions.</p>
+            </at-if>
+
+            <p>
+                You can <button onclick="setLocation('fairy-entrance')">return to the entrance</button>,  
+                <at-switch>
+                    <at-case state="fairy-lantern-held or glowing-flower-held">
+                        or follow the gurgling <button onclick="setLocation('fairy-stream')">stream</button> to uncover where it leads.
+                    </at-case>
+                    <at-else>
+                        but the path forward looks too shrouded in gloom to safely follow without a light source.
+                    </at-else>
+                </at-switch>
+            </p>
+
+            <at-item id="glowing-flower">
+                <at-if state="not glowing-flower-held">
+                    <p>Among the riotous blossoms, one particular flower radiates with an inner luminescence. By plucking the <button onclick="takeItem('glowing-flower'); disableState('glowing-flower-present')">living lantern</button>, you could illuminate the shadowed path ahead.</p>
+                </at-if>
+            </at-item>
+
+            <at-item id="flitting-butterfly" style="display:none">
+                <at-switch>
+                    <at-case state="flitting-butterfly-held">
+                        <p>A delicate azure <button onclick="dropItem('flitting-butterfly'); enableState('glowing-gemstone-present')">butterfly</button> rests lightly upon your finger, slowly opening and closing its iridescent wings.</p>
+                    </at-case>
+                    <at-else state="flitting-butterfly-present">
+                        <p>A brilliant blue butterfly flutters past in a mesmerizing dance on the breeze before perching atop a nearby bloom, silently beckoning you to <button onclick="takeItem('flitting-butterfly'); disableState('flitting-butterfly-present'); enableState('followed-butterfly')">follow its lead</button>.</p>
+                    </at-else>
+                </at-switch>
+            </at-item>
+
+            <at-if state="followed-butterfly">
+                <p>The butterfly flutters away, leaving behind a glimmering trail that reveals a hidden <button onclick="showItem('twinkling-gemstone')">gemstone</button> nestled in the meadow grass!</p>
+            </at-if>
+
+            <at-item id="twinkling-gemstone" style="display:none">  
+                <at-switch>
+                    <at-case state="twinkling-gemstone-held">
+                        <p>Cradled in your palm is a tiny crystalline <button onclick="dropItem('twinkling-gemstone'); disableState('twinkling-gemstone-held')">gemstone</button>, its facets refracting every ray of light into an ever-shifting kaleidoscope of jewel-toned hues.</p>
+                    </at-case>
+                    <at-case state="twinkling-gemstone-present">
+                        <p>Hidden among the waving grasses, a <button onclick="takeItem('twinkling-gemstone'); disableState('twinkling-gemstone-present')">glimmering gemstone</button> winks at you, its rainbow of inner fire shimmering in the dappled sunlight.</p>
+                    </at-case>
+                </at-switch>
+            </at-item>
+
+        </at-location>
+
+        <at-location id="fairy-stream">
+            <h1>The Rainbow Brook</h1>
+
+            <p>A winding, crystal-clear stream meanders through this ethereal glade, its burbling waters alive with shimmering schools of jewel-toned minnows. Playful sprites peek out from behind mossy banks, beckoning with impish grins before plunging beneath the surface once more.</p>
+
+            <at-if state="fairy-lantern-held or glowing-flower-held">
+                <at-if state="not fairy-stream-seen">
+                    <p>The stream's shallow waters flow over a bed of smooth, kaleidoscopic stones, their colors dancing in the rippling currents. Delicate marsh violets nestle along the water's edge, mingling with the emerald embrace of soft pillowy mosses.</p>
+                </at-if>
+            </at-if>
+            <at-else>
+                <p>Without a guiding light source, the details of the shadowed glade remain tantalizingly obscured from your eyes.</p>
+            </at-else>
+
+            <p>You can <button onclick="setLocation('fairy-meadow')">return to the sunlit meadow</button> or 
+                <at-switch>
+                    <at-case state="silver-thimble-held">  
+                        <button onclick="setLocation('fairy-hollow')">use the silver thimble</button> to carefully float across the stream and follow its winding course.
+                    </at-case>
+                    <at-else>
+                        but the stream's waters grow too deep to risk crossing further downstream without some sort of tiny vessel.
+                    </at-else>
+                </at-switch>
+            </p>
+
+            <at-item id="silver-thimble" style="display:none">
+                <at-if state="not silver-thimble-held">
+                    <at-if state="fairy-lantern-held or glowing-flower-held">
+                        <p>In a shaft of refracted light, a tiny <button onclick="takeItem('silver-thimble'); disableState('silver-thimble-present')">silver thimble</button> winks at you from the streambed. Perhaps you could fashion it into a makeshift vessel to continue your journey?</p>
+                    </at-if>
+                </at-if>
+            </at-item>
+
+            <at-item id="shimmering-dewdrop">
+                <at-switch>
+                    <at-case state="shimmering-dewdrop-held">
+                        <p>Balanced carefully in your palm rests a perfect sphere of <button onclick="dropItem('shimmering-dewdrop'); disableState('shimmering-dewdrop-held')">glistening dew</button>. Within its mirrored depths, the entire world seems reflected and refracted into a kaleidoscope of liquid prisms.</p>
+                    </at-case>
+                    <at-case state="shimmering-dewdrop-present">
+                        <p>A radiant <button onclick="takeItem('shimmering-dewdrop'); enableState('shimmering-dewdrop-held'); disableState('shimmering-dewdrop-present')">dewdrop</button> clings precariously to a mossy rock by the stream, refracting the dappled sunlight into a dazzling rainbow aurora that dances across the rippling surface.</p>
+                    </at-case>
+                </at-switch>
+            </at-item>
+        </at-location>
+
+        <at-location id="fairy-hollow">
+            <h1>The Hollow Heart</h1>
+
+            <p>You find yourself in the ethereal embrace of a fallen willow's hollow trunk, the ancient wood interwoven with verdant vines and twinkling crystalline gemstones. Shafts of warm sunlight filter down from above, bathing the space in a dreamy mosaic of kaleidoscopic light.</p>
+
+            <at-if state="not fairy-hollow-seen">
+                <p>Sweet melodies drift upon the air, the notes shimmering like audible stardust amidst the airy wisps of dandelion spores drifting through the rays of sun. At the heart of this sylvan sanctum swirls a shimmering <button onclick="enableState('fairy-portal-active')">vortex of color and light</button>, illuminating the hollow with incandescent refractions.</p>
+            </at-if>
+            
+            <at-if state="fairy-portal-active">
+                <p>The radiant vortex thrums and pulsates, parting the very air with a silken touch as it beckons you to <button onclick="setLocation('backyard-garden'); disableState('fairy-realm-access')">step through the luminous portal</button> and return to the world you once knew.</p>
+            </at-if>
+            
+            <at-if state="not fairy-portal-active">
+                <p>This enchanted hollow lies at the very heart of the fairy realm; its mysteries not yet fully unlocked, the doorway to your origins remains obscured behind a silken veil of glimmering secrets.</p>
+            </at-if>
+
+            <p>You can <button onclick="setLocation('fairy-stream')">return to the rainbow brook</button> and continue your exploration of this whimsical wonderland.</p>
+
+            <at-item id="twinkling-gemstone">
+                <at-switch>  
+                    <at-case state="twinkling-gemstone-held">
+                        <p>Cradled in your palm is a tiny crystalline <button onclick="dropItem('twinkling-gemstone'); disableState('twinkling-gemstone-held')">gemstone</button>, its facets refracting every ray of light into an ever-shifting kaleidoscope of jewel-toned hues.</p>
+                    </at-case>
+                    <at-case state="twinkling-gemstone-present">
+                        <p>Nestled among the gnarled roots of the ancient willow, a <button onclick="takeItem('twinkling-gemstone'); disableState('twinkling-gemstone-present')">glimmering gemstone</button> winks at you amidst the intertwined vines, its rainbow of inner fire shimmering in the filtered sunlight.</p>
+                    </at-case>
+                </at-switch>
+            </at-item>
+
+            <at-if state="fairy-realm-access and twinkling-gemstone-held and shimmering-dewdrop-held and flitting-butterfly-held and curious-pixie-held and silver-thimble-held and glowing-flower-held">
+                <p>You have unlocked every secret of the fairy realm! As you reverently place each treasured keepsake on the mossy ground, the vortex begins pulsing with renewed energy. The portal shimmers invitingly, ready to spirit you home, your wondrous journey complete.</p>
+            </at-if>
+
+        </at-location>
+
+    </body>
+</html>

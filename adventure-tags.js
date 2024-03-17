@@ -1,6 +1,7 @@
 // Global variables
 let currentLocation;
 let heldItems = [];
+let hiddenItems = [];
 let states = {};
 
 const locationTag = 'at-location';
@@ -9,6 +10,7 @@ const switchTag = 'at-switch';
 const caseTag = 'at-case';
 const elseTag = 'at-else';
 const ifTag = 'at-if';
+const elseIfTag = 'at-else-if';
 
 const childCaseSelector = `:scope > ${caseTag}`;
 const childElseSelector = `:scope > ${elseTag}`;
@@ -126,24 +128,24 @@ function getState(name) {
 
 function updateState({set, clear}, render = false) {
   if (set) {
-    set.forEach(state => setState(state, false));
+    set.forEach(state => enableState(state, false));
   }
   if (clear) {
-    set.forEach(state => clearState(state, false));
+    set.forEach(state => disableState(state, false));
   }
   if (render) {
     renderState();
   }
 }
 
-function setState(name, render = true) {
+function enableState(name, render = true) {
   states[name] = true;
   if (render) {
     renderState();
   }
 }
 
-function clearState(name, render = true) {
+function disableState(name, render = true) {
   delete states[name];
   if (render) {
     renderState();
@@ -211,29 +213,33 @@ class ElseElement extends HTMLElement {
 class IfElement extends HTMLElement {
 }
 
+class ElseIfElement extends HTMLElement {
+}
+
 customElements.define(locationTag, LocationElement);
 customElements.define(itemTag, ItemElement);
 customElements.define(switchTag, SwitchElement);
 customElements.define(caseTag, CaseElement);
 customElements.define(elseTag, ElseElement);
 customElements.define(ifTag, IfElement);
+customElements.define(elseIfTag, ElseIfElement);
 
 // Location functions
 function setLocation(id) {
   const newLocation = getElementById(id);
   if (currentLocation) {
     currentLocation.style.display = 'none';
-    clearState(`location-${currentLocation.id}`, false);
-    setState(`${currentLocation.id}-seen`, false);
-    heldItems.forEach(item => clearState(`${item.id}-${currentLocation.id}`, false));
-    currentLocation.querySelectorAll(nestedItemSelector).forEach(item => clearState(`${item.id}-present`, false));
+    disableState(`location-${currentLocation.id}`, false);
+    enableState(`${currentLocation.id}-seen`, false);
+    heldItems.forEach(item => disableState(`${item.id}-${currentLocation.id}`, false));
+    currentLocation.querySelectorAll(nestedItemSelector).forEach(item => disableState(`${item.id}-present`, false));
     currentLocation.emitExit();
   }
   currentLocation = newLocation;
-  setState(`location-${newLocation.id}`, false);
-  heldItems.forEach(item => setState(`${item.id}-${newLocation.id}`, false));
+  enableState(`location-${newLocation.id}`, false);
+  heldItems.forEach(item => enableState(`${item.id}-${newLocation.id}`, false));
   heldItems.forEach(item => currentLocation.appendChild(item));
-  currentLocation.querySelectorAll(nestedItemSelector).forEach(item => setState(`${item.id}-present`, false));
+  currentLocation.querySelectorAll(nestedItemSelector).forEach(item => enableState(`${item.id}-present`, false));
   newLocation.emitEntry();
   renderState();
   newLocation.style.display = 'block';
@@ -251,14 +257,14 @@ function getLocations() {
 function takeItem(id) {
   const item = getElementById(id);
   // item.dispatchEvent(new CustomEvent('ontake'));
-  setState(`${id}-held`);
+  enableState(`${id}-held`);
   heldItems.push(item);
   // item.dispatchEvent(new CustomEvent('onmove')); // TODO
 }
 
 function dropItem(id) {
   // item.dispatchEvent(new CustomEvent('ondrop'));
-  clearState(`${id}-held`);
+  disableState(`${id}-held`);
   item = getItem(id);
   heldItems = heldItems.filter(i => i !== item);
   // item.dispatchEvent(new CustomEvent('onmove')); // TODO
@@ -270,6 +276,18 @@ function getItem(id) {
 
 function getItems(container = document) {
   return [...container.querySelectorAll(nestedItemSelector)];
+}
+
+function hideItem(id) {
+  if (!hiddenItems.includes(id)) {
+    hiddenItems.push(id);
+    getItem(id).style.display = 'none';
+  }
+}
+
+function showItem(id) {
+  hiddenItems = hiddenItems.filter(i => i !== id);
+  getItem(id).style.display = 'block';
 }
 
 // Rendering functions
@@ -309,18 +327,22 @@ function renderIfs() {
 }
 
 function renderIf(ifEl) {
-  let elseEl = ifEl.nextElementSibling instanceof ElseElement ? ifEl.nextElementSibling : null;
-  const stateExpression = ifEl.getAttribute('state');
-  if (stateExpression && evaluateStateExpression(stateExpression)) {
-    ifEl.style.display = 'inline';
-    if (elseEl) {
-      elseEl.style.display = 'none';
-    }
-  } else {
-    ifEl.style.display = 'none';
-    if (elseEl) {
-      elseEl.style.display = 'inline';
-    }
+  let ifEls = [ifEl];
+  let nextEl = ifEl.nextElementSibling;
+  while (nextEl instanceof ElseIfElement) {
+    ifEls.push(nextEl);
+    nextEl = nextEl.nextElementSibling;
+  }
+  let elseEl = nextEl instanceof ElseElement ? nextEl : null;
+  const visibleIf = ifEls.find(ifEl => {
+    const stateExpression = ifEl.getAttribute('state');
+    return stateExpression && evaluateStateExpression(stateExpression);
+  });
+  for (const ifEl of ifEls) {
+    ifEl.style.display = ifEl === visibleIf ? 'inline' : 'none';
+  }
+  if (elseEl) {
+    elseEl.style.display = visibleIf ? 'none' : 'inline';
   }
 }
 

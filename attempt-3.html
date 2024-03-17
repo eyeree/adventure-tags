@@ -1,0 +1,129 @@
+<html lang="en">
+    <head>
+        <title>The Whimsical Fairy Garden</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="backyard-garden">
+            <h1>The Enchanted Backyard</h1>
+            <p>You find yourself standing in a cozy backyard garden, surrounded by a vibrant tapestry of flowers in full bloom. Their petals unfurl in a kaleidoscope of colors, drinking in the warm sunlight that filters through the canopy of trees overhead.</p>
+            <at-if state="not backyard-garden-seen">
+                <p>A quaint bird bath bubbles with crystal-clear water, its gentle melodies joining the symphony of chirping birds and buzzing bees. A winding stone pathway beckons you deeper into the garden's lush embrace, as if inviting you to uncover its secrets.</p>
+            </at-if>
+            <p>As you follow the path, your foot brushes against something metallic, half-buried in the pebbles. Kneeling down, you discover a <button onclick="takeItem('rusty-key')">rusty old key</button>, its surface pitted with age and wear.</p>
+            <at-item id="rusty-key">
+                <p>
+                    <at-if state="rusty-key-held">The rusty key feels warm in your palm, as if imbued with a strange energy. You can't shake the feeling that it holds the power to unlock something truly wondrous.</at-if>
+                    <at-else>You spot the rusty old key <at-if state="location-backyard-garden">nestled among the pebbles of the garden path</at-if>. You can <button onclick="takeItem('rusty-key')">pick it up</button>.</at-else>
+                </p>
+            </at-item>
+            <p>Your gaze is drawn to a small, ornate <button onclick="setLocation('fairy-gate')">gate</button> at the far end of the garden, its intricate metalwork nearly obscured by the vines and flowers that have grown over it.</p>
+        </at-location>
+
+        <at-location id="fairy-gate">
+            <h1>The Hidden Gate</h1>
+            <p>You approach the delicate, ornate gate, its intricate vines and flowers seeming to shimmer with a faint, otherworldly glow. As you reach out to touch the cool metal, a tingle of energy courses through your fingertips, as if the very fabric of reality grows thin at this spot.</p>
+            <at-if state="rusty-key-held">
+                <p>The rusty key in your hand seems to hum with a strange resonance, as if yearning to be reunited with the gate's lock.</p>
+            </at-if>
+            <at-switch>
+                <at-case state="not fairy-gate-seen">
+                    <p>You can't shake the feeling that something magical lies just beyond this threshold, waiting to be discovered.</p>
+                </at-case>
+                <at-case state="fairy-dust-used">
+                    <p>The gate's true form is now revealed, its vines and flowers glowing with an otherworldly light that casts intricate shadows of tiny fairies and woodland creatures across the ground.</p>
+                </at-case>
+            </at-switch>
+            <p>You can <button onclick="setLocation('backyard-garden')">return to the garden</button>.</p>
+            <at-item id="fairy-dust">
+                <at-if state="fairy-dust-held">
+                    <p>You hold a small pouch of shimmering fairy dust, its glittering particles seeming to dance and swirl within its confines.</p>
+                    <p>You can <button onclick="enableState('fairy-dust-used'); hideItem('fairy-dust')">sprinkle the fairy dust</button> on the gate.</p>
+                </at-if>
+                <at-else state="location-fairy-gate and not fairy-dust-used">
+                    <p>A small pouch lies on the ground, its contents shimmering with an otherworldly glow. You can <button onclick="takeItem('fairy-dust')">pick up the fairy dust</button>.</p>
+                </at-else>
+            </at-item>
+            <at-if state="fairy-dust-used and rusty-key-held">
+                <p>With the fairy dust revealing the gate's true form, you notice a keyhole carved into the metalwork. You can <button onclick="enableState('gate-unlocked'); disableState('rusty-key-held')">use the rusty key</button> to unlock it.</p>
+            </at-if>
+            <at-if state="gate-unlocked">
+                <p>The gate swings open with a creaking sound, revealing a hollowed-out log just beyond. A warm, inviting glow seems to beckon you from within. You can <button onclick="setLocation('hollow-log')">enter the log</button>.</p>
+            </at-if>
+        </at-location>
+
+        <at-location id="hollow-log">
+            <h1>The Woodland Threshold</h1>
+            <p>You duck through the open gate and find yourself standing within a massive, hollowed-out log, its walls carved with intricate patterns of vines and leaves. Sunlight filters through the log's twisted branches, casting a warm, dappled glow over the earthy interior.</p>
+            <at-if state="not hollow-log-seen">
+                <p>The air is rich with the scent of moss and decaying leaves, mingled with the sweet fragrance of wildflowers. You can't help but feel as though you've stumbled into another world entirely, a place where the boundaries between reality and fantasy grow thin.</p>
+            </at-if>
+            <p>A small <button onclick="enableState('met-gnome')">gnome</button> sits on a toadstool, whittling away at a piece of wood with a tiny knife. He glances up as you approach, his eyes twinkling with mischief.</p>
+            <at-if state="met-gnome">
+                <at-npc id="curious-gnome">
+                    <p>"Well, well, what have we here?" the gnome chuckles, setting aside his carving. "A traveler from the outside world, come to seek the wonders of the fairy realm."</p>
+                    <p>He strokes his long, wiry beard thoughtfully. "But to truly experience the magic of this place, you must first prove your worth by solving the riddles I pose."</p>
+                    <p>The gnome leans forward conspiratorially. "Let's see... what grows down, while its roots grow up?"</p>
+                    <p>You can <button onclick="enableState('solved-riddle-1')">attempt to solve the riddle</button>.</p>
+                    <at-if state="solved-riddle-1">
+                        <p>"Aha, a clever one, I see!" the gnome exclaims with delight. "A stalactite grows down from the cave ceiling, while its roots, the stalagmites, grow up from the floor."</p>
+                        <p>"But let's see if you can puzzle out this next one: What has a face and two hands, but no arms or legs?"</p>
+                        <p>You can <button onclick="enableState('solved-riddle-2')">attempt to solve the riddle</button>.</p>
+                    </at-if>
+                    <at-if state="solved-riddle-2">
+                        <p>The gnome throws back his head with a hearty laugh. "Well done, well done! A clock, of course. Now, one final riddle for you: What gets broken without being held?"</p>
+                        <p>You can <button onclick="enableState('solved-riddle-3')">attempt to solve the riddle</button>.</p>
+                    </at-if>
+                    <at-if state="solved-riddle-3">
+                        <p>"Ah, you've truly impressed me with your wit and cunning," the gnome says, beaming with pride. "The answer is a promise! You've proven yourself worthy of exploring the fairy realm further."</p>
+                        <p>With a wave of his hand, the gnome opens a hidden door in the log, revealing a path that leads deeper into the enchanted forest. "Beyond here lies the Mushroom Grove. I wish you the best of luck on your journey, my friend!"</p>
+                        <p>You can <button onclick="setLocation('mushroom-grove')">follow the path</button>.</p>
+                    </at-if>
+                </at-npc>
+            </at-if>
+            <p>If you wish to leave the fairy realm for now, you can <button onclick="setLocation('fairy-gate')">go back through the gate</button>.</p>
+        </at-location>
+
+        <at-location id="mushroom-grove">
+            <h1>The Luminescent Grove</h1>
+            <p>You emerge from the hollow log and find yourself standing in a vibrant grove filled with towering, glowing mushrooms of every color imaginable. Their soft, pulsing light casts an ethereal glow over the surrounding trees and foliage, painting the world in a kaleidoscope of otherworldly hues.</p>
+            <at-if state="not mushroom-grove-seen">
+                <p>The air is thick with the earthy scent of fungi, mingled with the sweet aroma of wildflowers. You can hear the faint buzz of insects and the rustling of unseen creatures in the undergrowth, as if the very forest itself is alive with magic.</p>
+            </at-if>
+            <p>As you wander among the luminescent mushrooms, you notice a cluster of them emitting a particularly brilliant glow. Kneeling down, you can <button onclick="takeItem('glowing-spores')">collect some of the glowing spores</button> that drift lazily from their caps.</p>
+            <at-item id="glowing-spores">
+                <p>
+                    <at-if state="glowing-spores-held">You hold a small pouch filled with glowing spores from the mushrooms, their soft light pulsing gently in your palm.</at-if>
+                    <at-else>A cluster of glowing mushrooms releases a cloud of shimmering spores into the air. You can <button onclick="takeItem('glowing-spores')">collect some of the spores</button>.</at-else>
+                </p>
+            </at-item>
+            <p>A winding path leads deeper into the grove, its destination obscured by the towering fungi. Somewhere ahead, you can sense the presence of something truly magical. You can <button onclick="setLocation('fairy-palace')">follow the path</button>.</p>
+            <p>Or, if you wish to retrace your steps, you can <button onclick="setLocation('hollow-log')">go back the way you came</button>.</p>
+        </at-location>
+
+        <at-location id="fairy-palace">
+            <h1>The Fairy Queen's Palace</h1>
+            <p>After winding your way through the Mushroom Grove, you emerge into a breathtaking clearing. In the center stands a magnificent palace, its walls and spires crafted from twisted vines, vibrant flowers, and precious gems that sparkle like stars in the warm fairy light.</p>
+            <at-if state="not fairy-palace-seen">
+                <p>The air is filled with the melodic humming of countless tiny wings, as fairies flit to and fro, tending to the palace gardens and going about their mystical tasks. You can't help but feel as though you've stepped into the pages of a storybook, surrounded by the very essence of enchantment.</p>
+            </at-if>
+            <p>As you approach the palace, a regal figure emerges from the ornate entrance, her gossamer wings shimmering with iridescent hues. It is the Fairy Queen herself, her very presence commanding a sense of awe and reverence.</p>
+            <at-npc id="fairy-queen">
+                <p>"Welcome, brave traveler," she greets you warmly, her voice like the tinkling of silver bells. "You have journeyed far and overcome many challenges to reach my realm. For that, you shall be rewarded."</p>
+                <at-if state="glowing-spores-held">
+                    <p>"I see you have collected some of the glowing spores from the Mushroom Grove," she remarks, her eyes twinkling with approval. "These will serve you well in illuminating the darkest corners of the fairy realm, should you ever lose your way."</p>
+                </at-if>
+                <p>"As a token of my gratitude, I shall grant you one wish. But choose wisely, for the magic of the fairy folk is not to be taken lightly."</p>
+                <p>You can <button onclick="enableState('made-wish'); disableState('glowing-spores-held')">make a wish</button>.</p>
+                <at-if state="made-wish">
+                    <p>The Fairy Queen smiles, her radiant expression filling you with a sense of warmth and contentment. "Your wish shall be granted, for you have proven yourself a true friend of the fairy folk."</p>
+                    <p>With a graceful wave of her hand, she opens a shimmering portal, its surface rippling like liquid moonlight. "This portal will return you to the world from whence you came. But know that you will always be welcome in our enchanted realm, should you ever wish to seek its wonders once again."</p>
+                    <p>You can <button onclick="setLocation('backyard-garden')">step through the portal</button>.</p>
+                </at-if>
+            </at-npc>
+        </at-location>
+
+    </body>
+</html>

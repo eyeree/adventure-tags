@@ -1,0 +1,1 @@
+That's great! Now make any revisions you feel are necessary to improve consistency and to polish the player experience. Now is your chance to be very creative in your writing. Aim to entertain and surprise the reader with your prose!

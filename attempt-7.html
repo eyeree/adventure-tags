@@ -1,0 +1,147 @@
+<html lang="en">
+    <head>
+        <title>Willow's Poetic Journey</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+        <at-location id="willows-bedroom">
+            <h1>Willow's Bedroom</h1>
+            <p>In the cozy confines of her room, Willow's imagination takes flight. Surrounded by cherished treasures, she sits cross-legged on the floor, her eyes alight with wonder.</p>
+            
+            <at-item id="willows-doll">
+                <p>
+                    <em>Rosie</em>, her beloved doll, rests in Willow's lap – a faithful companion on countless whimsical adventures. With a gentle smile, Willow strokes Rosie's yarn hair, contemplating their next fantastic journey.
+                    <at-if state="willows-doll-held">
+                        Will you <button onclick="dropItem('willows-doll')">tuck Rosie away</button> for now or keep her close?
+                    </at-if>
+                    <at-else>
+                        You can <button onclick="takeItem('willows-doll')">scoop up Rosie</button> and let her join your escapade.
+                    </at-else>
+                </p>
+            </at-item>
+
+            <at-item id="storybook">
+                <p>
+                    An enchanting storybook lies open on the floor, its pages brimming with tales of wonder and possibility. Willow traces her fingers along the words, longing to step into the vibrant worlds they describe.
+                    <at-if state="storybook-held">
+                        Will you <button onclick="dropItem('storybook')">close the book</button> for now or lose yourself in its stories once more?
+                    </at-if>
+                    <at-else>
+                        You can <button onclick="takeItem('storybook')">pick up the book</button> and let its magic guide you.
+                    </at-else>
+                </p>
+            </at-item>
+
+            <p>A stirring in Willow's heart beckons her to <button onclick="setLocation('enchanted-forest')">venture forth</button> and explore the world beyond her bedroom walls. With a deep breath, she prepares to embark on a journey like no other.</p>
+        </at-location>
+
+        <at-location id="enchanted-forest">
+            <h1>The Enchanted Forest</h1>
+            
+            <at-if state="not enchanted-forest-seen">
+                <p>Willow steps across the threshold, leaving her bedroom behind and entering a realm where whimsy and magic intertwine. The trees seem to whisper secrets, their branches swaying in an unseen dance. The very air is alive, carrying the scent of adventure and possibility.</p>
+            </at-if>
+
+            <at-item id="talking-butterfly">
+                <at-if state="talking-butterfly-held">
+                    <p>A <button onclick="dropItem('talking-butterfly')">breathtaking butterfly</button> alights upon your finger, its delicate wings fluttering with wisdom gathered from countless journeys.</p>
+                </at-if>
+                <at-else>
+                    <p>A <button onclick="takeItem('talking-butterfly')">dazzling butterfly</button> flits nearby, its intricate patterns beckoning you to listen to the gentle melodies it hums.</p>
+                </at-else>
+            </at-item>
+
+            <at-item id="glowing-mushroom">
+                <at-if state="glowing-mushroom-held">
+                    <p>Cradled in your palm, a <button onclick="dropItem('glowing-mushroom')">luminous mushroom</button> pulses with ethereal light, casting a warm glow to guide your path.</p>
+                </at-if>
+                <at-else>
+                    <p>A cluster of <button onclick="takeItem('glowing-mushroom')">glowing mushrooms</button> catches your eye, their gentle radiance inviting you to explore the forest's mysteries.</p>
+                </at-else>
+            </at-item>
+
+            <p>Willow can <button onclick="setLocation('the-crossroads')">follow the winding trail</button> deeper into the enchanted woods, or <button onclick="setLocation('willows-bedroom')">return to the comfort of her room</button> for now, the call of adventure still echoing in her heart.</p>
+        </at-location>
+
+        <at-location id="the-crossroads">
+            <h1>The Crossroads</h1>
+
+            <at-if state="not the-crossroads-seen">
+                <p>The path diverges, presenting Willow with a choice that will shape the course of her journey. The forest seems to hold its breath, awaiting her decision.</p>
+            </at-if>
+
+            <at-item id="compass">
+                <at-if state="compass-held">
+                    <p>Clutching her trusty <button onclick="dropItem('compass')">compass</button>, Willow feels a sense of direction amidst the uncertainty. Its reassuring weight in her palm reminds her that even when the way forward is unclear, she need not lose her path.</p>
+                </at-if>
+                <at-else>
+                    <p>A weathered <button onclick="takeItem('compass')">compass</button> lies on the ground, its needle pointing resolutely onward, ready to guide Willow's steps.</p>
+                </at-else>
+            </at-item>
+
+            <at-item id="fork-in-road" style="display:none">
+                <p>Before her, the <button onclick="showItem('fork-in-road')">path forks</button>, each branch leading to unknown adventures and untold discoveries.</p>
+                <at-if state="fork-in-road-seen">
+                    <p>Willow's heart flutters with a mixture of trepidation and exhilaration. She knows her choice will shape her journey in profound ways, and the weight of that decision settles upon her shoulders like a gentle mantle.</p>
+                </at-if>
+            </at-item>
+
+            <p>Willow can <button onclick="enableState('fork-in-road-seen'); setLocation('river-of-emotions')">follow the path to the left</button>, <button onclick="enableState('fork-in-road-seen'); setLocation('mountaintop-of-wisdom')">take the path to the right</button>, or <button onclick="setLocation('enchanted-forest')">retrace her steps</button> through the enchanted woods.</p>
+        </at-location>
+
+        <at-location id="river-of-emotions">
+            <h1>The River of Emotions</h1>
+
+            <at-if state="not river-of-emotions-seen">
+                <p>A tranquil river winds its way through the forest, its waters reflecting the ever-changing tides of Willow's heart. The gentle burbling seems to whisper secrets of joy and sorrow, laughter and tears.</p>
+            </at-if>
+
+            <at-item id="willows-tears">
+                <at-if state="willows-tears-held">
+                    <p>Willow holds a <button onclick="dropItem('willows-tears')">delicate vial</button> filled with her own crystalline tears – a reminder of the depths of emotion she has plumbed on her journey.</p>
+                </at-if>
+                <at-else>
+                    <p>A <button onclick="takeItem('willows-tears')">crystalline vial</button> lies by the riverbank, waiting to capture the essence of Willow's innermost feelings.</p>
+                </at-else>
+            </at-item>
+
+            <at-item id="message-in-bottle" style="display:none">
+                <at-if state="message-in-bottle-held">
+                    <p>Clutching a <button onclick="dropItem('message-in-bottle')">glass bottle</button> that washed ashore, Willow wonders what secrets it may hold – a message from another traveler, perhaps, or a glimpse into her own unwritten future.</p>
+                </at-if>
+                <at-else>
+                    <p>A <button onclick="takeItem('message-in-bottle'); showItem('message-in-bottle')">glass bottle</button> bobs gently in the river's current, beckoning Willow to unravel its mystery.</p>
+                </at-else>
+            </at-item>
+
+            <p>Willow can <button onclick="setLocation('the-crossroads')">follow the river's flow</button> back to the crossroads, or <button onclick="disableState('message-in-bottle-seen'); setLocation('mountaintop-of-wisdom')">continue her ascent</button> toward the mountaintop that looms in the distance, its peak shrouded in wisps of cloud.</p>
+        </at-location>
+
+        <at-location id="mountaintop-of-wisdom">
+            <h1>The Mountaintop of Wisdom</h1>
+
+            <at-if state="not mountaintop-of-wisdom-seen">
+                <p>After a long and winding journey, Willow stands atop a towering peak, the world stretching out before her in all its majesty. The view is breathtaking, and for a moment, all she can do is gaze in wonder at the tapestry of forests, rivers, and clouds that unfurls beneath her feet.</p>
+            </at-if>
+
+            <at-item id="book-of-life">
+                <at-if state="book-of-life-held">
+                    <p>In her hands, Willow holds a <button onclick="dropItem('book-of-life')">worn leather tome</button>, its pages brimming with the lessons of her adventure. She runs her fingers along the embossed cover, marveling at how such a small book could contain the wisdom of a lifetime.</p>
+                </at-if>
+                <at-else>
+                    <p>A <button onclick="takeItem('book-of-life')">ancient book</button> rests on a pedestal, its weathered pages promising to unlock the secrets of life itself. Willow feels a pull toward it, as though it has been waiting just for her.</p>
+                </at-else>
+            </at-item>
+
+            <at-item id="willows-memories" style="display:none">
+                <p>The journey has been etched into Willow's heart, a tapestry of <button onclick="showItem('willows-memories')">cherished memories</button> that will forever guide her path.</p>
+                <at-if state="willows-memories-seen">
+                    <p>She has learned that life is a poetic dance, filled with wonder, growth, and the courage to embrace the unknown. Though her path may wind and twist, leading her to unexpected places, she knows that each step is part of a greater journey – one that will never truly end.</p>
+                </at-if>
+            </at-item>
+
+            <p>From this mountaintop, Willow can <button onclick="setLocation('the-crossroads')">look back on her journey</button>, tracing the winding path that led her here, or <button onclick="disableState('willows-memories-seen'); setLocation('willows-bedroom')">return home</button>, forever changed by the wisdom she has gained.</p>
+        </at-location>
+    </body>
+</html>

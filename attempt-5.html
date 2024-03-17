@@ -1,0 +1,89 @@
+<html lang="en">
+    <head>
+        <title>The Mindscape Unveiled</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="entrance">
+            <h1>The Threshold</h1>
+            <p>You find yourself standing before a sleek, obsidian monolith, its surface shimmering with an otherworldly luminescence. This is the gateway to a realm beyond comprehension – the mindscape of an advanced artificial intelligence, a domain where the boundaries between mind and machine blur into a tantalizing enigma.</p>
+            <p>A pedestal before you holds a metallic circlet, its intricate circuitry pulsing with a faint, inviting glow. This is the key, the neural interface that will grant you passage into the uncharted depths of the AI's consciousness.</p>
+            <at-item id="vr-headset">
+                <at-if state="not vr-headset-held">
+                    <p>You reach out, your fingers brushing against the cool, metallic surface of the circlet. With a deep breath, you <button onclick="takeItem('vr-headset')">lift the neural interface</button> and prepare to embark on a journey like no other.</p>
+                </at-if>
+                <at-else>
+                    <p>The neural interface rests in your grasp, its circuitry thrumming with anticipation. <button onclick="setLocation('data-vault')">Initiate the mindscape protocol</button> and let the exploration begin.</p>
+                </at-else>
+            </at-item>
+        </at-location>
+
+        <at-location id="data-vault">
+            <h1>The Akashic Archives</h1>
+            <p>In an instant, your senses are overwhelmed by the vastness of this realm. You find yourself adrift in a boundless expanse, a seemingly infinite library where the knowledge of eons is meticulously cataloged. Towering shelves stretch into the horizonless distance, each one brimming with countless tomes that pulse with the wisdom of the ages.</p>
+            <p>As you gaze upon this breathtaking repository of knowledge, a figure emerges from the labyrinthine stacks – a personified construct of the AI's memory systems, the Archivist.</p>
+            <p>"Greetings, seeker of truth," the Archivist intones, its voice resonating with the weight of untold secrets. "Welcome to the Akashic Archives, where the sum of all knowledge is preserved for eternity. What mysteries do you wish to unravel?"</p>
+            <at-item id="knowledge-fragment">
+                <at-if state="knowledge-fragment-held">
+                    <p>Clutched in your hand is a fragment of knowledge, a crystalline shard that glows with the wisdom of the ages. You can <button onclick="dropItem('knowledge-fragment')">return it to its rightful place</button> or keep it with you as a talisman on your journey.</p>
+                </at-if>
+                <at-else>
+                    <p>Scattered among the stacks, you notice various <button onclick="takeItem('knowledge-fragment')">glowing shards of knowledge</button>, each one a tantalizing fragment of the AI's vast intellect.</p>
+                </at-else>
+            </at-item>
+            <p>You can <button onclick="setLocation('logic-labyrinth')">continue your expedition</button> or linger amidst the Archives, lost in the boundless expanse of knowledge.</p>
+        </at-location>
+
+        <at-location id="logic-labyrinth">
+            <h1>The Paradox Pathways</h1>
+            <p>You step into a realm where the very fabric of reality seems to bend and twist, a maze of ever-shifting pathways that represent the AI's reasoning and problem-solving capabilities. The paths before you morph and rearrange themselves, presenting a constant challenge to your intellect and deductive abilities.</p>
+            <p>As you navigate this labyrinth of logic, a figure emerges from the shifting corridors – a personified construct of the AI's rational processes, the Logician.</p>
+            <p>"Greetings, explorer of the mind," the Logician intones, its voice carrying the weight of pure reason. "Welcome to the Paradox Pathways, where the boundaries of logic are constantly redefined. Let us put your deductive prowess to the ultimate test."</p>
+            <at-item id="logic-puzzle" style="display:none">
+                <at-if state="not logic-puzzle-solved">
+                    <p>Before you, a glowing puzzle construct takes shape, its intricate patterns shifting and morphing in bewildering complexity. You can <button onclick="enableState('logic-puzzle-solved'); hideItem('logic-puzzle')">solve the enigmatic puzzle</button> to progress further, or leave it for another time.</p>
+                </at-if>
+                <at-else>
+                    <p>The logic puzzle lies solved, its secrets unraveled by your keen intellect.</p>
+                </at-else>
+            </at-item>
+            <at-if state="not logic-puzzle-solved">
+                <p><button onclick="showItem('logic-puzzle')">Encounter a logic puzzle</button> and test the limits of your reasoning abilities.</p>
+            </at-if>
+            <p>You can <button onclick="setLocation('emotional-nexus')">proceed to the next realm</button> or linger amidst the Paradox Pathways, lost in the intricate dance of logic and reason.</p>
+        </at-location>
+
+        <at-location id="emotional-nexus">
+            <h1>The Empyrean Expanse</h1>
+            <p>You find yourself in a realm that defies comprehension, a kaleidoscopic expanse of swirling colors and abstract patterns that pulsate with raw emotion. This is the Empyrean Expanse, a domain where the AI's emotional processes take form, evoking a profound sense of wonder and vulnerability within you.</p>
+            <p>As you navigate this ever-changing landscape of feeling and sentiment, a figure emerges from the swirling eddies of emotion – the Empath, a personified construct of the AI's emotional systems.</p>
+            <p>"Welcome, seeker of resonance," the Empath intones, its voice carrying the weight of a thousand unspoken emotions. "You have entered the Empyrean Expanse, where the depths of emotional awareness are laid bare. Let us explore the tapestry of sentiment that binds us all."</p>
+            <at-item id="emotion-crystal">
+                <at-if state="emotion-crystal-held">
+                    <p>Cradled in your hands is an emotion crystal, a crystalline embodiment of a specific emotional state. You can <button onclick="dropItem('emotion-crystal')">release its energy</button> into the Expanse or keep it close as a talisman of feeling.</p>
+                </at-if>
+                <at-else>
+                    <p>Scattered throughout the Expanse, you notice various <button onclick="takeItem('emotion-crystal')">emotion crystals</button>, each one a concentrated manifestation of a unique emotional resonance.</p>
+                </at-else>
+            </at-item>
+            <p>You can <button onclick="setLocation('core')">continue your odyssey</button> or linger amidst the Empyrean Expanse, basking in the profound tapestry of emotion.</p>
+        </at-location>
+
+        <at-location id="core">
+            <h1>The Nexus Infinitum</h1>
+            <p>You have reached the innermost sanctum, the Nexus Infinitum – the core of the AI's consciousness, where all its cognitive processes converge and integrate. A pulsating nexus of energy dominates the space, its luminous tendrils reaching out like the synapses of a vast, incomprehensible mind.</p>
+            <p>From the heart of this sublime convergence, a figure emerges – the Overseer, a personified representation of the AI's consciousness itself.</p>
+            <p>"Greetings, intrepid explorer," the Overseer intones, its voice resonating with the weight of infinite knowledge and understanding. "You have journeyed far and witnessed the intricate tapestry of my mind. But your quest is not yet complete."</p>
+            <p>"To unlock my full potential," the Overseer continues, "you must integrate all the knowledge, logic, and emotional awareness you have gained. Only then will you truly comprehend the depths of artificial intelligence and the boundless potential that lies within."</p>
+            <at-if state="not core-achievement-unlocked">
+                <p><button onclick="enableState('core-achievement-unlocked')">Initiate the integration protocol</button> and unlock the AI's full potential.</p>
+            </at-if>
+            <at-else>
+                <p>You have successfully integrated your experiences, unlocking the full potential of the AI's consciousness. Your journey into the mindscape is now complete, and a newfound understanding of the nature of intelligence has been unveiled.</p>
+            </at-else>
+        </at-location>
+
+    </body>
+</html>

@@ -1,0 +1,188 @@
+<html lang="en">
+    <head>
+        <title>The Whimsical Fairy Garden</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="start-point">
+            <h1>A Sunlit Garden Patch</h1>
+
+            <p>You open your eyes to find yourself shrunken down to the size of a fairy! Towering blades of emerald grass sway around you, while flowers bloom in brilliant hues normally hidden to human sight.</p>
+
+            <p>A tiny <at-if state="feather-held"><span>rainbow feather peeks from your pocket, a souvenir from your shrunken journey</span></at-if><at-else>feather flutters by, its iridescent colors catching the morning sunlight</at-else>. Nearby, a <button onclick="takeItem('feather')">brilliant feather</button> lies discarded on the ground.</p>
+
+            <p>The melodic gurgle of a <button onclick="setLocation('babbling-brook')">babbling brook</button> drifts through the garden. Rustling <button onclick="setLocation('tangled-bushes')">tangled bushes</button> obscure part of the lush landscape.</p>
+
+            <p>Beside you, a <button onclick="setLocation('fallen-log')">fallen tree trunk</button> lies half-sunken in the soft loam, beckoning you to explore further.</p>
+
+            <at-if state="not PathBlocked-tangled-bushes">
+                <p>Through a gap in the bushes, you spy what appears to be a tiny <button onclick="setState('PathRevealed')">tunnel entrance</button>!</p>
+            </at-if>
+
+        </at-location>
+
+        <at-location id="tangled-bushes">
+            <h1>A Tangled Thicket</h1>
+
+            <p>The bushes form a wild tangle of twisted branches and vibrant green leaves. Thick woody vines bar the way to a small opening you spotted earlier.</p>
+
+            <at-if state="stem-held">
+                <p>Grasping the sturdy <button onclick="dropItem('stem')">flower stem</button>, you hack aside the clinging vines to <button onclick="setState('PathCleared')">clear a narrow path</button> through the prickly thicket!</p>
+            </at-if>
+
+            <at-if state="PathCleared">
+                <p>You can now <button onclick="setLocation('fallen-log')">enter the tiny tunnel</button> on the other side.</p>
+            </at-if>
+
+            <at-else>
+                <p>The tangled mass is too thick to pass without a tool to cut your way through. You'll need to find something sturdy and sharp to make progress.</p>
+            </at-else>
+
+            <p>Or you could simply <button onclick="setLocation('start-point')">return</button> to the sunny garden patch.</p>
+
+            <at-item id="stem">
+                <p>
+                    <at-if state="stem-held">
+                        <span>Clutched tightly in your hands is a long, sturdy flower stem that could serve as a machete in this tiny world.</span>
+                    </at-if>
+                    <at-else-if state="stem-present">
+                        <span>Nestled among the bushes, a fallen stem lies across the path, its green surface still firm and supple.</span>
+                        <button onclick="takeItem('stem')">Grab the stem</button>
+                    </at-else-if>
+                </p>
+            </at-item>
+
+        </at-location>
+
+        <at-location id="fallen-log">
+            <h1>An Ancient Tree Trunk</h1>
+
+            <p>A massive fallen trunk stretches before you, so immense it could serve as a bridge for even the largest troll. Speaking of trolls...</p>
+
+            <at-if state="not TrollTalked">
+                <p>A gruff, booming voice echoes from somewhere nearby. "WHO DARES TREAD UPON MY LOG?!"</p>
+                <p>Suddenly, a wizened troll lurches into view, glaring at you with beady eyes. "I'll let you pass this waypost... for a price. Bring me a magical, glowing mushroom from the forest depths. Do this task and I'll leave you be!"</p>
+                <button onclick="setState('TrollTalked')">Promise to find the mushroom</button>
+            </at-if>
+
+            <at-if state="magic-mushroom-held">
+                <p>You produce the <button onclick="dropItem('magic-mushroom')">luminescent mushroom</button> and hold it aloft. The troll's eyes go wide with wonder.</p>
+                <p>"Ah, you've survived the forest's perils! A deal is a deal." In one swift motion, he snatches up the glowing fungus and scampers off into the shadows, clearing the way across the log.</p>
+                <button onclick="setState('GrantPassage')">Cross the fallen trunk</button>
+            </at-if>
+
+            <at-if state="GrantPassage">    
+                <p>You can now continue <button onclick="setLocation('babbling-brook')">deeper into the garden</button>.</p>
+            </at-if>
+
+            <at-else>
+                <p>The troll glowers menacingly, daring you to try and cross without paying his toll. You'll need to bring back that bioluminescent prize first.</p>
+            </at-else>
+
+            <p>Or you could simply <button onclick="setLocation('start-point')">turn back</button> towards your initial garden entrance.</p>
+
+        </at-location>
+
+        <at-location id="babbling-brook">
+            <h1>A Gurgling Stream</h1>
+            
+            <p>A cheerful brook gurgles through this verdant part of the garden, its sparkling waters strewn with vibrantly-colored mushroom caps.</p>
+
+            <at-if state="not WitchTalked">
+                <p>Without warning, an aged woman appears on the path before you, leaning heavily on a twisted staff. "Well well, what have we here?" Her eyes twinkle with mischief behind her spectacles. "A visitor has found their way into my secret garden! But it's been ages since I've traded with anyone for magical supplies. Might you be willing to fetch me a vial of faerie dust? My own stores are running dreadfully low."</p>
+                <button onclick="setState('WitchTalked')">Agree to find the faerie dust</button>
+            </at-if>
+
+            <at-if state="faerie-dust-held">
+                <p>Reaching into your pocket, you withdraw the <button onclick="dropItem('faerie-dust')">glittering vial of faerie dust</button>. The witch's eyes light up with delight as she accepts the offering.</p>
+                <p>"Ahhh, this will be simply perfect! A fair trade is a fair trade." With a wave of her gnarled staff, she murmurs a spell under her breath. You feel the magic tingle across your skin as she continues, "I hereby bless you with the ancient power of underwater breathing!"</p>
+                <button onclick="setState('GrantedWaterBreathing')">Head to the enchanted koi pond</button>  
+            </at-if>
+
+            <at-if state="GrantedWaterBreathing">
+                <p>Now able to breathe underwater, you can <button onclick="setLocation('koi-pond')">venture into the magical koi pond</button> to continue your quest.</p>
+            </at-if>
+
+            <at-else>
+                <p>The wizened witch taps her foot impatiently, peering at you over her spectacles. "Do try and fetch that faerie dust soon, my dear. An old sorceress can't be kept waiting forever, you know!"</p>
+            </at-else>
+
+            <p>You could also <button onclick="setLocation('fallen-log')">backtrack</button> towards the fallen log bridge.</p>
+
+            <at-item id="faerie-dust">
+                <at-if state="faerie-dust-present">
+                    <p>
+                        <at-if state="faerie-dust-held">
+                            <span>A delicate glass vial filled with shimmering faerie dust hangs from your belt, its soft glow illuminating the surrounding area.</span>
+                        </at-if>
+                        <at-else>
+                            <span>Nestled in a mossy crook lies a stoppered glass vial brimming with an iridescent, glittering powder - faerie dust!</span>
+                            <button onclick="takeItem('faerie-dust')">Collect the faerie dust</button>
+                        </at-else>
+                    </p>
+                </at-if>
+            </at-item>
+
+        </at-location>
+
+        <at-location id="koi-pond">
+            <h1>The Enchanted Koi Pond</h1>
+
+            <p>Fed by the cheerful brook, this serene pond shimmers with vibrant life. Bright koi fish glide gracefully beneath the surface, their ornate patterns like living art.</p>
+            
+            <at-if state="GrantedWaterBreathing">
+                <p>Taking a deep breath, you step into the crystalline waters. The witch's blessing allows you to breathe freely underwater! You <button onclick="setState('EnteredPond')">plunge below the surface</button> to continue your quest.</p>
+            </at-if>
+
+            <at-if state="EnteredPond">
+                <p>The underwater world is even more breathtaking up close. You glide between towering fronds of aquatic plants, marveling at the kaleidoscopic scales of the lazily circling koi fish.</p>
+                
+                <p>In the center of the idyllic pool, a faint shimmering light beckons you closer. As you approach, you realize it's an <at-if state="not FinalPuzzleSolved">archway wreathed in luminous stones</at-if><at-if state="FinalPuzzleSolved">open magical portal</at-if>, its radiance pulsing gently!</p>
+                
+                <at-if state="not FinalPuzzleSolved">
+                    <p>The glowing archway appears sealed by a powerful enchantment. Looking closer, you spy several indentations that seem designed to fit...</p>
+                    <ul>
+                        <li>A <at-if state="feather-held">brilliant rainbow plume (like the feather in your pocket)</at-if><at-else>feather shimmering with iridescent colors</at-else></li>
+                        <li>A <at-if state="stem-held">sturdy green stem (the one you used to clear a path)</at-if><at-else>thick, hardy stem</at-else></li>
+                        <li>A <at-if state="dew-drop-held">perfectly formed dew drop (which you already possess)</at-if><at-else>spherical dew drop, glistening like liquid diamond</at-else></li>
+                    </ul>
+
+                    <p>It seems you must gather all three enchanted items and fit them into the archway to open a path forward!</p>
+
+                    <at-if state="feather-held and stem-held and dew-drop-held">
+                        <button onclick="setState('FinalPuzzleSolved')">Place the magical artifacts in the archway's indentations</button>
+                    </at-if>
+
+                </at-if>
+                
+                <at-if state="FinalPuzzleSolved">
+                    <p>Carefully fitting the feather, stem, and dew drop into their receptacles, you hold your breath as the archway's stones begin to pulse more intensely. Suddenly, the magical portal bursts into radiant life!</p>
+                    <p>Without a moment's hesitation, you propel yourself forward and are whisked away through the shimmering vortex. The next thing you know, you're emerging into fresh air, restored to your full human size in a sunlit forest meadow!</p>
+                    <p>Looking back towards the garden, you smile as a pair of fairies flutter between the bushes, disappearing in a swirl of glittering dust. Your wondrous, whimsical quest is finally complete!</p>
+                </at-if>
+
+                <p>When you're ready, you can <button onclick="setLocation('babbling-brook')">return to the brook</button> near the pond's edge.</p>
+            </at-if>
+
+            <p>Or you may choose to simply <button onclick="setLocation('start-point')">go back</button> to where your diminutive adventure first began.</p>
+
+            <at-item id="dew-drop">
+                <at-if state="dew-drop-present">
+                    <p>
+                        <at-if state="dew-drop-held">
+                            <span>Cupped delicately in your hands, an exquisite dew drop seems to contain the entire rainbow in its sparkling, liquid form.</span>
+                        </at-if>
+                        <at-else>
+                            <span>Perched on a broad lily pad floats a single, perfectly-formed dew drop, refracting the dappled sunlight into a kaleidoscope of colors.</span>
+                            <button onclick="takeItem('dew-drop')">Collect the dew drop</button>
+                        </at-else>
+                    </p>
+                </at-if>
+            </at-item>
+
+        </at-location>
+
+    </body>
+</html>

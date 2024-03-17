@@ -1,0 +1,138 @@
+<html lang="en">
+    <head>
+        <title>The Whimsical Fairy Garden</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="entrance_gate">
+            <h1>The Garden Gate</h1>
+            
+            <p>A vine-covered stone archway looms before you, the entrance to a magical fairy garden. Tiny flickering lights dance around the twisted vines like pixie lanterns.</p>
+
+            <at-if state="not entrance_gate-seen">
+                <p>Through the archway you glimpse a whimsical wonderland. Towering toadstool kingdoms, a bubbling brook, and ancient crumbling stairs all overgrown with vibrant flowers and moss. But the rusty gate blocks your way, firmly shut.</p>
+            </at-if>
+
+            <at-item id="rusty_key">
+                <at-if state="not rusty_key-held">  
+                    <p>
+                        Beneath a mossy rock, something glints in the shadows. You unearth a <a onclick="takeItem('rusty_key')">rusty old key</a>. Perhaps it opens the stubborn gate?
+                    </p>
+                </at-if>
+                <at-else>
+                    <p>Grasping the rusty key tightly, you insert it into the lock and give it a twist. <a onclick="setState('gate_open')">With an echoing creak, the gate magically swings open!</a></p>
+                </at-else>
+            </at-item>
+
+            <at-if state="gate_open">
+                <p>The garden gate stands open, beckoning you to <a onclick="setLocation('mushroom_glen')">enter the enchanted realm beyond</a>.</p>
+            </at-if>
+            <at-else>
+                <p>The gate remains stubbornly locked. You'll need to find a way to open it.</p>
+            </at-else>
+
+        </at-location>
+
+        <at-location id="mushroom_glen">
+            <h1>Mushroom Glen</h1>
+
+            <p>You step into an enchanted glade, the ground soft with moss and wildflowers. Towering above are colossal red-and-white spotted mushrooms, their broad caps providing shady refuge for the tiny residents.</p>
+
+            <at-if state="not mushroom_glen-seen">
+                <p>Darting between the massive mushroom stalks are a handful of glowing pixies! The tiny faerie folk pause, peering at you with curious expressions on their miniature faces.</p>
+            </at-if>
+
+            <at-item id="glowing_mushroom">
+                <at-switch>
+                    <at-case state="glowing_mushroom-held">
+                        <p>Clutched safely in your hands is a <a onclick="dropItem('glowing_mushroom')">glowing mushroom</a>, its soft bioluminescent light illuminating the area.</p>
+                    </at-case>
+                    <at-case state="glowing_mushroom-present">
+                        <p>A <a onclick="takeItem('glowing_mushroom')">glowing mushroom</a> sprouts nearby, its warm glow like a tiny faerie lantern.</p>
+                    </at-case>
+                </at-switch>
+            </at-item>
+
+            <at-if state="not mushroom_glen-seen">
+                <p>"You there, human!" pipes a tiny voice. A pixie no larger than your finger is hovering in front of you, hands on hips. "We faerie folk don't just give away the path to the fairy circle, you know. First, you must complete some tasks for us..."</p>
+            </at-if>
+
+            <p>A winding trail leads away from the glen, towards the sound of <a onclick="setLocation('enchanted_stream')">running water</a>.</p>
+
+        </at-location>
+
+        <at-location id="enchanted_stream">
+            <h1>The Enchanted Stream</h1>
+
+            <p>Ahead gurgles a winding forest brook, its waters so clear you can see the colorful pebbles lining the bottom. Darting fish occasionally break the surface with a splash.</p>
+
+            <at-if state="not enchanted_stream-seen">
+                <p>On delicate translucent wings, a swarm of iridescent dragonflies hovers to-and-fro above the stream, the faerie guides of these waters.</p>
+            </at-if>
+
+            <p>The brook is too wide to simply hop across. Luckily, a trail of <a onclick="setState('lily_pads')">lily pads</a> floats along the surface, forming a bridge. But they shift and scatter with every splash!</p>
+
+            <at-item id="silver_lyre">
+                <at-if state="silver_lyre-held">
+                    <p>
+                        Plucking the strings of the delicate <a onclick="dropItem('silver_lyre')">silver lyre</a>, you play a flowing melody. At the enchanting notes, the fish begin leaping rhythmically, causing the lily pads to shift and form a pathway across the stream!
+                    </p>
+                </at-if>
+                <at-else>
+                    <p>Half-buried in the muddy bank lies a <a onclick="takeItem('silver_lyre')">silver lyre</a>. Its polished surface is inscribed with shimmering runes.</p>
+                </at-else>
+            </at-item>
+
+            <at-if state="lily_pads">
+                <p>With the lily pad path formed by the music, you are able to carefully <a onclick="setLocation('sunken_staircase')">cross to the other side</a>.</p>
+            </at-if>
+            <at-else>
+                <p>The burbling stream proves impassable without a way to safely traverse its waters.</p>
+            </at-else>
+
+        </at-location>
+        
+        <at-location id="sunken_staircase">
+            <h1>The Sunken Staircase</h1>
+            
+            <p>Ancient weathered stone steps rise before you, the crumbling staircase half-reclaimed by vines and roots. At the top, a wooden door hangs open just a crack, beckoning you upwards.</p>
+
+            <at-item id="speaking_toadstool">
+                <at-if state="speaking_toadstool-present">
+                    <p>
+                        Squatting at the base of the steps is an enormous <a onclick="setState('solving_riddle')">grumbling spotted toadstool</a> larger than a millstool. "Halt, human!" it wheezes in a reedy voice. "To gain the path above, you must best me with riddles!"
+                    </p>
+                    <at-if state="solving_riddle">
+                        <p>The toadstool rumbles out a rhyme: "I follow you all of the time, faithful though I may seem. Seldom living, often walking, I am just a shadow's dream. What am I?"</p>
+                        <a onclick="setState('speaking_answer', 'correct')">Your shadow</a><br>
+                        <a onclick="setState('speaking_answer', 'wrong')">The moon</a><br>
+                        <at-if state="speaking_answer">
+                            <p>The toadstool lets out a loud belch of spores. <at-if state="speaking_answer-correct">"Well answered, clever thing! The door to the circle awaits..."</at-if><at-else>"Ha! Not even close, human. Let's try another!"</at-else></p>
+                        </at-if>
+                    </at-if>
+                </at-if>
+            </at-item>
+
+            <at-if state="speaking_answer-correct">
+                <p>With a groan, the old wooden door swings wide, revealing a sunlit path leading up into the trees. Warm golden light filters down, promising the end of your journey through this mystical realm. Taking a deep breath, you begin <a onclick="setLocation('fairy_circle')">ascending the final stairs</a>.</p>
+            </at-if>
+
+        </at-location>
+
+        <at-location id="fairy_circle">
+            <h1>The Hidden Fairy Circle</h1>
+
+            <p>You emerge into a secluded sunlit meadow encircled by wildflowers in every vivid hue imaginable. In the center, luminous mushrooms and toadstools form an ancient faerie ring. Seated among them is a tiny glowing figure no taller than your hand.</p>
+
+            <p>"Well met, wanderer," chimes a melodious voice as the queen of the faeries gracefully rises into the air before you, her gossamer wings humming. "You have proven your worth by conquering the challenges of our enchanted realm."</p>
+            
+            <p>"And so, as promised, I shall grant you one heartfelt wish." She spreads her arms wide, and a swirl of shimmering faerie dust engulfs you...</p>
+
+            <p>In a dizzying rush, the world rapidly expands and shifts around you, until once more you stand at human size outside the vine-covered gate! With a wistful smile, you turn to give the magical garden one final glance before starting on your journey home, the lingering enchantment of the fairy folk warming your heart.</p>
+
+        </at-location>
+
+    </body>
+</html>

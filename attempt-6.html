@@ -1,0 +1,167 @@
+<html lang="en">
+    <head>
+        <title>The Star-Spangled Tour</title>
+        <script src="./adventure-tags.js"></script>
+        <link href="./adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="national-mall">
+            <h1>The National Mall</h1>
+            
+            <p>You find yourself standing amidst the iconic monuments and stately museums of the National Mall, the lush green heart of the nation's capital. A warm breeze rustles the trees lining the wide grassy expanse before you.</p>
+
+            <at-if state="not national-mall-seen">
+                <p>"Welcome, welcome to Washington D.C.!" calls out a boisterous voice. A tour guide wearing a star-spangled top hat and matching vest strides over, flashing a grin. "I'm Capital Sam, federal freeman of fun facts and freedonutor extraordinaire, at your service!"</p>
+                <p>Sam thrusts a map and camera into your hands. "These'll come in handy as we hit all the patriotic pit stops on our star-spangled excursion today! The question is, where does liberty's story begin?"</p>
+            </at-if>
+
+            <at-item id="sam">
+                <p>Capital Sam, your high-energy tour guide, is with you sporting his red, white and blue garb. "This is the National Mall, the people's promenade!" he declares grandly. "Does freedom have a footprint more profound than this two-mile swath from the Capitol to the Lincoln Memorial?"</p>
+                <p>"But enough civic scenery," Sam continues. "Let's kick off our patriotic pilgrimage with some aeronautic accomplishments!" He points dramatically. <button onclick="setLocation('air-space-museum')">To the Air and Space Museum!</button></p>
+            </at-item>
+
+            <at-item id="map">
+                <p>You have a handy map to navigate your way between D.C.'s famous landmarks.</p>
+                <button onclick="showItem('sam')">Ask Sam where to explore next</button> 
+            </at-item>
+
+            <at-item id="camera">  
+                <p>A camera for capturing memories of your epic American expedition.</p>
+                <button onclick="dropItem('camera')">Stow the camera</button>
+            </at-item>
+
+        </at-location>
+
+        <at-location id="air-space-museum">
+            <h1>National Air and Space Museum</h1>
+
+            <p>You approach the unmistakable curved architecture of the Air and Space Museum, home to some of humanity's most impressive flying machines and spacecraft. The exhibits beckon with their tales of daring innovation and sky-shattering achievements.</p>
+
+            <at-if state="not air-space-seen">
+                <p>"Welcome to the main hangar of America's aeronautic triumphs!" Sam booms, sweeping an arm dramatically. "Over 8 million visitors a year come to bask in the glory of our nation's winged wonders and out-of-this-world exploratory prowess."</p>
+            </at-if>
+
+            <at-item id="sam">
+                <p>"Feast your freedom-loving eyes on that beauty - the 1903 Wright Flyer, the very first heavier-than-air powered aircraft to defy gravity!" Sam proclaims. "And look over there, the Apollo 11 command module that transported those celestial heroes to the lunar surface in 1969!"</p>
+                <p>Sam pulls a pamphlet from his vest and winks conspiratorially. "Learn even more sky-high secrets by adding this to your liberty library!"</p>
+                <button onclick="enableState('got-pamphlet')">Take the museum pamphlet</button>
+            </at-item>
+
+            <at-item id="camera">
+                <p>You snap some photos capturing aviation's finest winged wonders on display.</p>
+                <button onclick="dropItem('camera')">Stow the camera</button>
+            </at-item>
+
+            <at-if state="got-pamphlet">
+                <at-item id="pamphlet">
+                    <p>The pamphlet provides additional insight into the exhibits, including the history of the Wright brothers whose persistent experiments paved the runway for modern aviation.</p>
+                    <p>"Just wait until you see what soars next on our freedom field trip!" Sam declares excitedly.</p>
+                    <button onclick="setLocation('holocaust-museum')">Forge onward to the Holocaust Museum</button>
+                </at-item>
+            </at-if>
+
+            <at-else>
+                <p>You could <button onclick="setLocation('national-mall')">return to the National Mall</button> or <button onclick="enableState('got-pamphlet')">get the museum pamphlet from Sam</button>.</p>
+            </at-else>
+
+        </at-location>
+
+        <at-location id="holocaust-museum">
+            <h1>United States Holocaust Memorial Museum</h1>
+
+            <p>You enter the solemn granite walls of the Holocaust Memorial Museum. The weight of grief and hardship endured by millions presses heavily upon you as you proceed through the meticulously preserved artifacts and harrowing testimonies.</p>
+
+            <at-if state="not holocaust-museum-seen">
+                <p>Sam removes his star-spangled hat, his expression somber. "This hallowed ground serves as a reminder of one of humanity's darkest chapters - the genocide committed against Jews, minorities and other groups by the Nazi regime during World War II."</p>
+            </at-if>
+
+            <at-item id="sam">
+                <p>With a solemn air, Sam guides you through the museum exhibits, providing historical context. "We must study such atrocities, no matter how unspeakable, to ensure they never again stain the soul of civilization."</p>
+                <p>He motions reverently to the Hall of Witness. "That memorial honors those extraordinary individuals who, at tremendous personal risk, stood up against the Nazi's murderous creed."</p>
+                <button onclick="enableState('got-pamphlet')">Receive a museum pamphlet from Sam</button>
+            </at-item>
+
+            <at-item id="camera">
+                <at-if state="not holocaust-museum-seen">
+                    <p>Out of profound respect for the Memorial's sacred purpose, you refrain from taking any photographs inside.</p>
+                </at-if>
+            </at-item>
+
+            <at-if state="got-pamphlet">
+                <at-item id="pamphlet">
+                    <p>The pamphlet contains firsthand accounts from Holocaust survivors, emphasizing that we all must bear witness to such crimes against humanity to help prevent future genocides.</p>
+                    <p>You place a hand on Sam's shoulder. "Thank you for this humbling lesson on the resiliency of the human spirit against unconscionable evil."</p>
+                    <p>He nods solemnly. "Then let's press on, to honor their courage and hopes for a more enlightened future."</p>
+                    <button onclick="setLocation('library-congress')">Proceed to the Library of Congress</button>    
+                </at-item>        
+            </at-if>
+
+            <at-else>
+                <p>You could <button onclick="setLocation('air-space-museum')">return to the Air and Space Museum</button> or <button onclick="enableState('got-pamphlet')">get a pamphlet from Sam</button>.</p>
+            </at-else>
+
+        </at-location>
+
+        <at-location id="library-congress">
+            <h1>Library of Congress</h1>
+
+            <p>The regal Library of Congress stands as a veritable palace to human knowledge and intellectual pursuits. Its grand architecture and rich interior masonry echo with the whispers of millions of books and texts collected throughout history.</p>
+
+            <at-if state="not library-congress-seen">
+                <p>"Behold!" Sam declares, throwing his arms wide as you step into the opulent building. "The illustrious Library of Congress - home to over 170 million items in nearly every language imaginable! Books, recordings, manuscripts - a bounty beyond one lifetime's devouring!"</p>
+            </at-if>
+
+            <at-item id="sam">
+                <p>"Not only is this the oldest federal cultural institution in our nation," Sam continues, "but it is the single largest library collection on planet Earth! Did you know the original library was tragically burned by the British way back in 1814? These hallowed shelves were reseeded from the personal book stash of none other than President Thomas Jefferson himself!"</p>
+                <p>Sam holds out a pamphlet with a wink. "Care to grow that brilliant brain of yours a bit more?"</p>
+                <button onclick="enableState('got-pamphlet')">Accept the library pamphlet</button>
+            </at-item>
+
+            <at-item id="camera">
+                <p>Your camera shutter dances as you capture the splendid architectural details and ornate murals ornamenting the grand reading rooms.</p>
+                <button onclick="dropItem('camera')">Stow the camera</button>  
+            </at-item>
+
+            <at-if state="got-pamphlet">
+                <at-item id="pamphlet">
+                    <p>The library pamphlet reveals an endless trove of fascinating facts about the institution's unparalleled collection and history. Over 1 million new books are added annually from nearly every corner of the globe across 470 languages! The shelves measure a staggering 838 miles if stretched end to end.</p>
+                    <p>You gaze around in awe at the temple of knowledge surrounding you. Sam gives you a gentle nudge. "Just one stop remains on our patriotic odyssey! The people's house awaits..."</p>
+                    <button onclick="setLocation('white-house')">Make for the White House</button>
+                </at-item>
+            </at-if>
+
+            <at-else>
+                <p>You could <button onclick="setLocation('holocaust-museum')">return to the Holocaust Museum</button> or <button onclick="enableState('got-pamphlet')">get a pamphlet from Sam</button>.</p>
+            </at-else>
+
+        </at-location>
+
+        <at-location id="white-house">
+            <h1>The White House</h1>
+
+            <p>At long last, you arrive at the quintessential residence of American executive power - the White House. Though fences and security barriers keep you at a respectful distance, the very sight of the iconic home is enough to fill you with awe and pride.</p>
+
+            <at-if state="not white-house-seen">
+                <p>"At last, we've reached the finish line, folks!" Sam gestures grandly toward the White House. "The grand mansion has housed every U.S. president except George Washington himself. It's seen fires, reconstruction, renovations - and likely a secret passageway or two over the years!"</p>
+            </at-if>
+
+            <at-item id="sam">
+                <p>"Construction on this hallowed home first began in good old 1792," Sam regales you. "Over the decades, new wings and renovations were added to its humble core structure. When the British burned it in 1814, it was rebuilt using the famous line item in the budget 'for rebuilding the President's house, known as the White House.'"</p>  
+                <p>Sam leans in with a conspiratorial grin. "And just between you and me, I hear the White House kitchen is stocked with an arsenal of snacks to handle any presidential midnight cravings that arise!"</p>
+            </at-item>
+            
+            <at-item id="camera">
+                <p>You take your time capturing the perfect photos of the White House's distinguished neoclassical facade and pristine grounds.</p>
+                <p>Sam nudges you with an appreciative smile. "With those snapshots, you'll have memories galore to treasure from our whirlwind trek through this nation's iconic heart and living history!"</p>
+                <p><button onclick="alert('Congratulations on completing the Star-Spangled Tour!')">Conclude the tour in style</button></p>
+            </at-item>
+
+            <at-else>
+                <button onclick="setLocation('library-congress')">Return to the Library of Congress</button>  
+            </at-else>
+
+        </at-location>
+
+    </body>
+</html>
