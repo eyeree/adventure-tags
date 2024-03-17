@@ -1,10 +1,8 @@
 <html lang="en">
     <head>
-        <title>Prototype</title>
+        <title>Example Adventure</title>
         <script src="./adventure-tags.js"></script>
-        <style>
-            a { color: blue; text-decoration: underline; cursor: pointer; }
-        </style>
+        <link href="./adventure-tags.css" rel="stylesheet" />
         <script>
             onLoad(() => {
                 getLocation('outside-cabin')
@@ -19,18 +17,14 @@
 
             <h1>Outside Cabin</h1>
 
-            <p>
-                You are outside a cabin in the woods.
-            </p>
+            <p>You are outside a cabin in the woods.</p>
 
             <at-if state="not outside-cabin-seen">
                 <p>
                     The cabin is small and rundown. It hasn't been occupied in years. There is one small broken window and a
                     door on one side. The cabin is completely surrounded by dark dense woods.
                 </p>
-                <p>
-                    You do not recall how you got here.
-                </p>
+                <p>You do not recall how you got here.</p>
             </at-if>
 
             <p>There is a <a onclick="setLocation('woods')">trail that leads into the woods</a>.</p>
@@ -42,9 +36,9 @@
 
             <h1>Inside Cabin</h1>
 
-            <p>
-                You are inside of a dirty old cabin. <at-if state="not lantern-on">It is dark in here.</case>
-            </p>
+            <p>You are inside of a dirty old cabin. <at-if state="not lantern-on">It is dark in here.</case></p>
+
+            <p>You can <a onclick="setLocation('outside-cabin')">exit the cabin</a>.</p>
 
             <at-item id="lantern">
                 <p>
@@ -57,21 +51,19 @@
                     </at-else>
                     or
                     <at-if state="lantern-on">
-                        <a onclick="clearState('lantern-on')">turn it off</a>.
+                        <a onclick="clearState('lantern-on')">turn the lantern off</a>.
                     </at-if>
                     <at-else>
-                        <a onclick="setState('lantern-on')">turn it on</a>.
+                        <a onclick="setState('lantern-on')">turn the lantern on</a>.
                     </at-else>
                 </p>
             </at-item>
-
-            <p>You can <a onclick="setLocation('outside-cabin')">exit the cabin</a>.</p>
             
         </at-location>
 
         <at-location id="woods">
             <h1>Woods</h1>
-            <p>You have followed a path deep into the woods, but the trail seems to end here. You can <a onclick="setLocation('outside-cabin')">go back the way you came</a> .</p>
+            <p>You have followed a path deep into the woods, but the trail seems to end here. You can <a onclick="setLocation('outside-cabin')">go back the way you came</a>.</p>
             <at-item id="coin">
                 <at-switch>
                     <at-case state="coin-held">
