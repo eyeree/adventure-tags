@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <title>Prototype</title>
-        <script src="./simple-adventure-tags.js"></script>
+        <script src="./adventure-tags.js"></script>
         <style>
             a { color: blue; text-decoration: underline; cursor: pointer; }
         </style>
@@ -63,46 +63,6 @@
                         <a onclick="setState('lantern-on')">turn it on</a>.
                     </at-else>
                 </p>
-                <!-- <p>
-                    You are holding a 
-                    <span data-state='lantern-on'>glowing</span>
-                    <span data-state='not lantern-on'>dark</span>
-                    lantern.
-                    You can 
-                    <span data-state="lantern-held"><a onclick="dropItem('lantern')">put the lantern down</a></span>
-                    <span data-state="not lantern-held"><a onclick="takeItem('lantern')">pick up the lantern</a></span>,
-                    or
-                    <span data-state="lantern-on"><a onclick="clearState('lantern-on')">turn it off</a></span>
-                    <span data-state="not lantern-on"><a onclick="setState('lantern-on')">turn it on</a></span>.
-                </p> -->
-                <!-- <p>
-                    <at-switch>
-                        <at-case state="lantern-held">
-                            You are holding a <at-switch><at-case state='lantern-on'>glowing</at-case><at-else>dark</at-else></at-switch> lantern.
-                            You can <a onclick="dropItem('lantern')">put the lantern down</a>, or 
-                            <at-switch>
-                                <at-case state='lantern-on'>
-                                    <a onclick="clearState('lantern-on')">turn it off</a>
-                                </at-case>
-                                <at-else>
-                                    <a onclick="setState('lantern-on')">turn it on</a>
-                                </at-else>
-                            </at-switch>.
-                        </at-case>
-                        <at-else>
-                            There is a <at-switch><at-case state='lantern-on'>glowing</at-case><at-else>dark</at-else></at-switch> lantern here. 
-                            You can <a onclick="takeItem('lantern')">pick the lantern up</a>, or
-                            <at-switch>
-                                <at-case state='lantern-on'>
-                                    <a onclick="clearState('lantern-on')">turn it off</a>
-                                </at-case>
-                                <at-else>
-                                    <a onclick="setState('lantern-on')">turn it on</a>
-                                </at-else>
-                            </at-switch>.
-                        </at-else>
-                    </at-switch>
-                </p> -->
             </at-item>
 
             <p>You can <a onclick="setLocation('outside-cabin')">exit the cabin</a>.</p>
