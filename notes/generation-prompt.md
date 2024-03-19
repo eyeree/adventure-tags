@@ -108,13 +108,15 @@ The <button> tag with an "onclick" attribute can be used to execute javascript c
 
 You can define whatever state variables you need to make the story interactive. There are some state variables defined by the system, and these will be set and cleared automatically (where ‹location-id› is the id of an <at-location> tag and ‹item-id› is the id of an <at-item> tag):
 
-* ‹locationID›-seen - Set when the player first leaves the specified location, and never cleared. Can be used to show a long description only when a location is first visited.
+* ‹location-id›-seen - Set when the player first leaves the specified location, and never cleared. Can be used to show a long description only when a location is first visited.
 
-* location-‹locationID› - Set when the player enters the specified location and cleared when the player leaves that locations. Can be used to display item content only while the item is at a specific location.
+* location-‹location-id› - Set when the player enters the specified location and cleared when the player leaves that locations. Can be used to display content only while the item is at a specific location.
 
-* ‹item-id›-held - Set when the player picks up the specified item and cleared when the player drops the item. Can be used to display item content only while the item is being carried by the player.
+* ‹item-id›-held - Set when the player picks up the specified item and cleared when the player drops the item. Can be used to display content only while the item is being carried by the player.
 
 * ‹item-id›-present - Set when the player enters the location where the specified item is located and cleared when they leave that location. Is always set for items that are being carried by the player, since this items are always at the same location as the player.
+
+* ‹item-id›-‹location-id› - Set when for all items at a location when the player enters the location, including items being carried by the player. Cleared for items carried by the player when they leave an location. Can be used to display content when an item is at a specific location.
 
 Do not attempt to directly enable or disable any of these built in states. They will be enabled and disabled automatically by the game engine when the APIs provided are called.
 

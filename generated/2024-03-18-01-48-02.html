@@ -1,0 +1,145 @@
+<html lang="en">
+    <head>
+        <title>Whimsical Fairy Garden</title>
+        <script src="../adventure-tags.js"></script>
+        <link href="../adventure-tags.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <at-location id="hidden-entrance">
+            <h1>The Hidden Entrance</h1>
+            <p>
+                You wander through the tranquil garden, admiring the vibrant flowers and the gentle sway of the trees.
+                Suddenly, a glimmer of light catches your eye, drawing you towards a seemingly ordinary patch of blooms.
+                As you crouch down to inspect the flowers more closely, a shimmering portal appears, revealing a lush,
+                enchanted world beyond.
+            </p>
+            <p>
+                With a deep breath, you reach out and touch the shimmering veil, feeling a tingle of magic dance across
+                your fingertips. Curiosity overcomes your hesitation, and you step forward, passing through the portal
+                and into the Fairy Glade.
+            </p>
+            <p>
+                <button onclick="setLocation('fairy-glade')">Step through the shimmering portal</button>
+            </p>
+        </at-location>
+
+        <at-location id="fairy-glade">
+            <h1>The Fairy Glade</h1>
+            <p>
+                You find yourself in a breathtaking meadow, surrounded by swaying wildflowers and a babbling brook. Towering
+                oak trees dot the landscape, their branches rustling softly in the gentle breeze. Tiny fairies flit about,
+                their delicate wings catching the sunlight as they tend to the vibrant garden. The air is filled with the
+                sweet scent of nectar and the melodic chirping of birds.
+            </p>
+            <at-item id="fairy-dust">
+                <p>
+                    As you take in the wondrous sights and sounds, a glimmer of light on a nearby rock catches your eye. You
+                    approach and discover a small pouch filled with shimmering <at-if state="fairy-dust-held">fairy dust</at-if><at-else>what appears to be fairy dust</at-else>. Curious, you
+                    <at-if state="fairy-dust-held">
+                        gently place the pouch back down,
+                    </at-if>
+                    <at-else>
+                        carefully pick up the pouch, feeling a tingle of magic as the dust sparkles in your palm.
+                    </at-else>
+                </p>
+            </at-item>
+            <p>
+                A faint rustling in the distance draws your attention, and you notice a winding path leading deeper into the
+                enchanted forest. <button onclick="setLocation('enchanted-thicket')">You decide to follow the path, eager to explore more of this whimsical realm.</button>
+            </p>
+        </at-location>
+
+        <at-location id="enchanted-thicket">
+            <h1>The Enchanted Thicket</h1>
+            <p>
+                The path leads you into a dense, tangled forest, where gnarled branches reach out like twisted fingers and
+                strange creatures lurk in the shadows. The air is thick with the scent of damp earth and the distant sound
+                of rustling leaves. As you cautiously make your way forward, you notice that the path ahead is blocked by a
+                tangle of thorny vines.
+            </p>
+            <at-if state="not fairy-dust-held">
+                <p>
+                    You frown, realizing that you'll need something to clear the vines before you can continue. Glancing
+                    around, you search for a suitable tool, but the forest seems to have other plans.
+                </p>
+            </at-if>
+            <at-if state="fairy-dust-held">
+                <p>
+                    Remembering the pouch of shimmering fairy dust in your possession, you carefully sprinkle a pinch of the
+                    magical powder over the thorny vines. To your delight, the vines instantly wither and recede, clearing
+                    the path ahead.
+                </p>
+                <p>
+                    <button onclick="setLocation('mushroom-maze'); disableState('fairy-dust-held'); dropItem('fairy-dust')">You step forward, eager to see what other wonders await in the depths of the enchanted forest.</button>
+                </p>
+            </at-if>
+        </at-location>
+
+        <at-location id="mushroom-maze">
+            <h1>The Mushroom Maze</h1>
+            <p>
+                You enter a disorienting area filled with towering, glowing mushrooms. The path twists and turns, and it's
+                difficult to tell which way is forward. Faint whispers and giggles seem to come from the shadows between
+                the mushrooms, as if the forest itself is playing a mischievous game.
+            </p>
+            <at-item id="enchanted-acorn">
+                <p>
+                    Nestled between the mushroom caps, you spot a tiny, sentient-looking acorn. It seems to be
+                    <at-if state="enchanted-acorn-held">
+                        chattering to itself quietly as you hold it, its beady eyes watching you with a curious expression.
+                    </at-if>
+                    <at-else>
+                        watching you with a curious expression, as if it's trying to decide whether or not to trust you.
+                    </at-else>
+                    You can
+                    <at-if state="enchanted-acorn-held">
+                        <button onclick="dropItem('enchanted-acorn')">gently place the acorn back down</button>,
+                    </at-if>
+                    <at-else>
+                        <button onclick="takeItem('enchanted-acorn')">carefully pick up the enchanted acorn</button>,
+                    </at-else>
+                    or leave it be and continue on your way.
+                </p>
+            </at-item>
+            <p>
+                The path ahead seems to wind deeper into the maze, and you can't help but feel a sense of curiosity and
+                excitement about what other wonders might be waiting for you. <button onclick="setLocation('garden-heart')">You take a deep breath and follow the path, determined to uncover the secrets of this enchanted place.</button>
+            </p>
+        </at-location>
+
+        <at-location id="garden-heart">
+            <h1>The Garden's Heart</h1>
+            <p>
+                You emerge into a serene, open clearing, where a shimmering fountain stands at the center. Ancient runes
+                are carved into the stone, and the air hums with a palpable magical energy. You feel a sense of awe and
+                wonder as you take in the beauty of this hidden sanctuary, your heart swelling with a deep appreciation
+                for the enchantment that surrounds you.
+            </p>
+            <at-if state="fairy-dust-held and enchanted-acorn-held">
+                <p>
+                    Remembering the items you've collected on your journey, you carefully sprinkle the fairy dust over the
+                    ancient runes and gently place the enchanted acorn into the fountain. Suddenly, the garden erupts in a
+                    dazzling display of light and sound, as the full power of this magical place is restored.
+                </p>
+                <p>
+                    A chorus of delighted fairy voices fills the air, and you feel a deep sense of accomplishment. Your
+                    adventure through the whimsical fairy garden has come to a satisfying conclusion, and you know that
+                    you will forever cherish the memories of this enchanting journey.
+                </p>
+                <p>
+                    <button onclick="disableState('fairy-dust-held'); disableState('enchanted-acorn-held')">You take one last look around the garden, then turn and make your way back through the portal, your heart filled with wonder.</button>
+                </p>
+            </at-if>
+            <at-else>
+                <p>
+                    As you gaze upon the shimmering fountain and the intricate runes, you can't help but feel that there
+                    is more to be done here. The items you've collected seem to hold the key to unlocking the full power
+                    of this sacred place, but you're not quite sure how to proceed. You pause, listening intently for any
+                    clues or guidance that the garden might offer.
+                </p>
+            </at-else>
+        </at-location>
+
+    </body>
+</html>

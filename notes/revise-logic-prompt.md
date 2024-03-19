@@ -32,4 +32,6 @@ You can define whatever state variables you need to make the story interactive. 
 
 * ‹item-id›-present - Set when the player enters the location where the specified item is located and cleared when they leave that location. Is always set for items that are being carried by the player, since this items are always at the same location as the player.
 
+* ‹item-id›-‹location-id› - Set when for all items at a location when the player enters the location, including items being carried by the player. Cleared for items carried by the player when they leave an location. Can be used to display content when an item is at a specific location.
+
 Do not attempt to directly enable or disable any of these built in states. They will be enabled and disabled automatically by the game engine when the APIs provided are called.

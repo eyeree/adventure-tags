@@ -231,15 +231,17 @@ function setLocation(id) {
     currentLocation.style.display = 'none';
     disableState(`location-${currentLocation.id}`, false);
     enableState(`${currentLocation.id}-seen`, false);
-    heldItems.forEach(item => disableState(`${item.id}-${currentLocation.id}`, false));
+    heldItems.forEach(item => disableState(`${item.id}-${currentLocation.id}`));
     currentLocation.querySelectorAll(nestedItemSelector).forEach(item => disableState(`${item.id}-present`, false));
     currentLocation.emitExit();
   }
   currentLocation = newLocation;
   enableState(`location-${newLocation.id}`, false);
-  heldItems.forEach(item => enableState(`${item.id}-${newLocation.id}`, false));
   heldItems.forEach(item => currentLocation.appendChild(item));
-  currentLocation.querySelectorAll(nestedItemSelector).forEach(item => enableState(`${item.id}-present`, false));
+  currentLocation.querySelectorAll(nestedItemSelector).forEach(item => {
+    enableState(`${item.id}-${newLocation.id}`, false)
+    enableState(`${item.id}-present`, false);
+  });
   newLocation.emitEntry();
   renderState();
   newLocation.style.display = 'block';

@@ -1,0 +1,29 @@
+{
+  "name": "adventure-tags",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "adventure-tags.js",
+  "scripts": {
+    "generate": "tsup-node --format esm generate.ts && node dist/generate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyeree/adventure-tags.git"
+  },
+  "author": "mike@eyeree.me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eyeree/adventure-tags/issues"
+  },
+  "homepage": "https://github.com/eyeree/adventure-tags#readme",
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.18.0",
+    "@types/node": "^20.11.28",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "node-html-parser": "^6.1.12"
+  }
+}
