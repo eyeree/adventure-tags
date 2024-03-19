@@ -1,6 +1,9 @@
 import * as fs from 'node:fs';
 import Anthropic from "@anthropic-ai/sdk";
 import { parse } from 'node-html-parser';
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const systemPrompt =
 `
