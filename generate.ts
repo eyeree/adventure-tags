@@ -470,6 +470,8 @@ async function generateLocationByLocation(theme:string, locationCount:number, fi
     async function generateLocations() {
         for (const location of locations) {
 
+            messages.length = resetLength;
+
             const locationId = location.getAttribute('id')!;
             const content = await prompt(
                 generateLocationContentPrompt
